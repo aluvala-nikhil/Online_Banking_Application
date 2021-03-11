@@ -167,6 +167,19 @@ form .btn-login{
     margin: 1rem;
 }
 
+.btn-sign {
+    background: var(--primary-gradient);
+    margin-right: 10em;
+    margin-top: 60px !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 60px;
+    padding-right: 60px;
+    float: right;
+    border-radius: 5rem;
+
+}
+
 .titles{
     margin-bottom: 2.2rem;
 }
