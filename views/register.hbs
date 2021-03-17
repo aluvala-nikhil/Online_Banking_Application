@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Online Banking Registation Page</title>
+
+
+    <!-- Owl-Carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+        integrity="sha256-UhQQ4fxEeABh4JrcmAJ1+16id/1dnlOEVCFOxDef9Lw=" crossorigin="anonymous" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+        integrity="sha256-kksNxjDRxd/5+jGurZUJd1sdR2v+ClrCl3svESBaJqw=" crossorigin="anonymous" />
+
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/23412c6a8d.js"></script>
+
+    <!-- Custom Style-->
+    <link rel="stylesheet" href="/reg-css/style.css">
+</head>
+
+<body>
+
+	<!-- Navigation bar -->
+
+	<header>
+		<div class="logo" style="padding-left: 50px;">
+			<h2>Online Banking</h2>
+		</div>
+		<nav>
+			<ul class="nav_links">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Contact Us</a></li>
+				<li><a href="#">Help</a></li>
+			</ul>
+		</nav>
+		<a class="cta" href="/Login" style="padding-right: 50px;"><button>Sign In</button></a>
+	</header>
+
+	<!-- /Navigation bar -->
+
+    <div class="container">
+        <div class="panel">
+            <div class="row">
+                <div class="col liquid">
+                    <h4>Welcome to Online Banking.</h4>
+
+                    <!-- Owl-Carousel -->
+
+                    <div class="owl-carousel owl-theme">
+                        <img src="/reg-img/reg3.webp" alt="" class="login_img">
+                        <img src="/reg-img/reg1.jpg" alt="" class="login_img">
+                        <img src="/reg-img/reg2.jpg" alt="" class="login_img">
+                    </div>
+
+                    <!-- /Owl-Carousel -->
+
+                </div>
+                <div class="col login">
+
+                    <div class="progress-bar">
+                        <div class="step">
+                          <p>User Id</p>
+                          <div class="bullet">
+                            <span>1</span>
+                          </div>
+                          <div class="check fas fa-check"></div>
+                        </div>
+                        <div class="step">
+                          <p>Security</p>
+                          <div class="bullet">
+                            <span>2</span>
+                          </div>
+                          <div class="check fas fa-check"></div>
+                        </div>
+                        
+                        <div class="step">
+                          <p>User Name</p>
+                          <div class="bullet">
+                            <span>3</span>
+                          </div>
+                          <div class="check fas fa-check"></div>
+                        </div>
+                        <div class="step">
+                          <p>Password</p>
+                          <div class="bullet">
+                              <span>4</span>
+                          </div>
+                          <div class="check fas fa-check"></div>
+                        </div>
+                      </div>
+                      <div class="form-outer">
+                        <form action="/auth/register" method="POST">
+                          <div class="page slide-page">
+                            <div class="title">Please enter the following details</div>
+                            <div class="field">
+                              <div class="label">User Id</div>
+                              <input class="firstInput1" type="text" name="userid">
+                            </div>
+                            <div class="field">
+                                <div class="label">Phone Number</div>
+                                <input class="firstInput2"  type="number" name="number">
+                            </div>
+                            <div class="field">
+                                <div class="label">Email Id</div>
+                                <input class="firstInput3" type="email" name="email">
+                            </div>
+                            <div class="field" style="margin-left: 30px;">
+                              <button type="submit" class="firstNext next">Next</button>
+                            </div>
+                          </div>
+                          <div class="page">
+                            <div class="title"></div>
+                            <div class="field">
+                              <div class="label">what is your mother's maiden name?</div>
+                              <input class="secondInput1" style="margin-top: 10px; margin-left: 30px; padding-top: 10px; padding-right: 10px;" name="question">
+                            </div>
+                            <div class="field btns">
+                              <button class="prev-1 prev">Previous</button>
+                              <button class="secondNext next-1 next">Next</button>
+                            </div>
+                            <div class="field">
+                                <div class="label" id="securityAnswer" style="padding-top: 5px; font-weight:bold"></div>
+                            </div>
+                          </div>
+                          <div class="page">
+                            <div class="field">
+                                <div class="title">Please enter the User Name</div>
+                            </div>
+                            <div class="field">
+                              <div class="label">User Name</div>
+                              <input class="thirdInput1" type="text" name="username" required pattern="[a-zA-Z0-9]+">
+                            </div>
+                            <div class="field btns">
+                              <button class="prev-2 prev">Previous</button>
+                              <button class="thirdNext next-2 next" onclick=next1()>Next</button>
+                            </div>
+                            <div class="field">
+                                <div class="label" id="username" style="padding-top: 5px; font-weight:bold"></div>
+                            </div>
+                          </div>
+                          <div class="page">
+                            <div class="title">Password</div>
+                            <div class="field">
+                              <div class="label">Password</div>
+                              <input class="fourthInput1" type="text" name="password">
+                            </div>
+                            <div class="field">
+                              <div class="label">Confirm Password</div>
+                              <input class="fourthInput2" type="password" name="password2">
+                            </div>
+                            <div class="field btns">
+                              <button class="prev-3 prev">Previous</button>
+                              <button class="submitButton submit">Submit</button>
+                            </div>
+                            <div id="pass"></div>
+                          </div>
+
+                        </form>
+
+                      </div>
+
+                      {{#if message}}
+                          <h4 style="padding-left: 30px;padding-top:4px">{{message}}</h4>
+                      {{/if}}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 2000,
+                autoplayHoverPause: true,
+                items: 1
+            });
+        });
+    </script>
+    <script>
+        let firstInput1 = document.querySelector(".firstInput1");
+        let firstInput2 = document.querySelector(".firstInput2");
+        let firstInput3 = document.querySelector(".firstInput3");
+
+        let secondInput1 = document.querySelector(".secondInput1");
+        
+        let thirdInput1 = document.querySelector(".thirdInput1");
+
+        let fourthInput1 = document.querySelector(".fourthInput1");
+        let fourthInput2 = document.querySelector(".fourthInput2");
+
+        let button1 = document.querySelector(".firstNext");
+        let button2 = document.querySelector(".secondNext");
+        let button3 = document.querySelector(".thirdNext");
+        let submitButton = document.querySelector(".submitButton");
+
+        
+
+        button1.disabled = true; //setting button state to disabled
+        button2.disabled = true;
+        button3.disabled = true;
+        submitButton.disabled = true;
+
+        firstInput1.addEventListener("change", stateHandle1);
+        firstInput2.addEventListener("change", stateHandle1);
+        firstInput3.addEventListener("change", stateHandle1);
+
+        secondInput1.addEventListener("change", stateHandle2);
+
+        thirdInput1.addEventListener("change", stateHandle3);
+
+        fourthInput1.addEventListener("change", stateHandle4);
+        fourthInput2.addEventListener("change", stateHandle4);
+
+        function stateHandle1() {
+          console.log("hello");
+          if (document.querySelector(".firstInput1").value === "" || document.querySelector(".firstInput2").value === "" || document.querySelector(".firstInput3").value === ""  ) {
+            
+            button1.disabled = true; //button remains disabled
+          } else {
+            
+            button1.disabled = false; //button is enabled
+          }
+        }
+
+        function stateHandle2() {
+          if (document.querySelector(".secondInput1").value === "") {
+            
+            button2.disabled = true; //button remains disabled
+          } else {
+            if(/^[a-z]+$/i.test(document.querySelector(".secondInput1").value)){
+                document.getElementById("securityAnswer").innerHTML="";
+                button2.disabled = false; //button is enabled
+
+            }
+            else{
+              button2.disabled = true;
+              document.getElementById("securityAnswer").innerHTML="Security Answer must be in Characters";
+            }
+            
+          }
+        }
+
+        function stateHandle3() {
+          if (document.querySelector(".thirdInput1").value === "") {
+           
+            button3.disabled = true; //button remains disabled
+          } else {
+
+            if(/^[a-zA-Z0-9]+$/i.test(document.querySelector(".thirdInput1").value)){
+                document.getElementById("username").innerHTML="";
+                button3.disabled = false; //button is enabled
+
+            }
+            else{
+              button3.disabled = true;
+              document.getElementById("username").innerHTML="Username must be Aplhanumeric";
+            }
+          }
+        }
+
+        function stateHandle4() {
+          
+          if (document.querySelector(".fourthInput1").value === "" && document.querySelector(".fourthInput2").value === ""  ) {
+              document.getElementById("pass").innerHTML="";
+              submitButton.disabled = true; //button remains disabled
+          } else {
+              if (document.querySelector(".fourthInput1").value.length >= 8) {
+                  document.getElementById("pass").innerHTML=""
+                  if((document.querySelector(".fourthInput1").value !== document.querySelector(".fourthInput2").value) ){
+                      document.getElementById("pass").innerHTML="Password do not match";
+                      submitButton.disabled = true;
+                  }
+                  else{ 
+                      document.getElementById("pass").innerHTML="";
+                      submitButton.disabled = false;
+                  }
+              } else {
+                document.getElementById("pass").innerHTML="Password Should be minimum of 8 characters"
+                submitButton.disabled = true; //button is enabled
+              }
+          }
+        }
+
+    </script>
+
+    <script src="/reg-script/script.js"></script>
+</body>
+
+</html>
