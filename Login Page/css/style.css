@@ -63,7 +63,11 @@ header {
 }
 
 .nav_links li a:hover {
-    color: #0088a9;
+    color: red;
+}
+
+.nav_links li a.active {
+    color: red;
 }
 
 button {
