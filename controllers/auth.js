@@ -45,7 +45,7 @@ exports.login = async(req,res) => {
                 sess.email = req.body.email;
                 sess.userid = results[0].userid;
                 console.log(sess);
-                res.status(200).redirect("/")
+                res.status(200).redirect("/main")
             }
         })
 
