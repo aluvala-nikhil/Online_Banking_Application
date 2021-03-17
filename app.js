@@ -4,7 +4,7 @@ const mysql=require("mysql");
 const dotenv=require("dotenv");
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const bodyParser = require('body-parser');
+
 
 dotenv.config({path: './.env'});
 
@@ -27,7 +27,6 @@ app.use(session({secret: process.env.JWT_SECRET,saveUninitialized: true,resave: 
 
 app.set('view engine', 'hbs');
 
-var sess;
 
 db.connect((error)=> {
     if(error){
