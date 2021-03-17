@@ -3,6 +3,8 @@ const path=require("path");
 const mysql=require("mysql");
 const dotenv=require("dotenv");
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const bodyParser = require('body-parser');
 
 dotenv.config({path: './.env'});
 
@@ -21,8 +23,11 @@ app.use(express.static(publicDirectory));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(cookieParser());
+app.use(session({secret: process.env.JWT_SECRET,saveUninitialized: true,resave: true}));
 
 app.set('view engine', 'hbs');
+
+var sess;
 
 db.connect((error)=> {
     if(error){

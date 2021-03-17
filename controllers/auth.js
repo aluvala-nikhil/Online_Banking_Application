@@ -26,7 +26,7 @@ exports.login = async(req,res) => {
                     message:'Email or Password is incorrect'
                 })
             } else{
-                const id =results[0].id;
+                const id =results[0].userid;
 
                 const token = jwt.sign({id :id}, process.env.JWT_SECRET,{
                     expiresIn: process.env.JWT_EXPIRES_IN
@@ -40,6 +40,11 @@ exports.login = async(req,res) => {
                 }
 
                 res.cookie('jwt', token, cookiesOptions);
+
+                sess = req.session;
+                sess.email = req.body.email;
+                sess.userid = results[0].userid;
+                console.log(sess);
                 res.status(200).redirect("/")
             }
         })
@@ -87,7 +92,7 @@ exports.register = (req, res) => {
                 message: 'User ID does not exist'
             })
         } 
-        
+
         if(phnumber!=results[0].phone_number){
             return res.render('register',{
                 message: 'Enter the Registered Phone Number'
