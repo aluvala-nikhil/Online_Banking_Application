@@ -14,7 +14,7 @@ exports.login = async(req,res) => {
         const {email, password} =req.body;
 
         if(!email || !password){
-            return res.ststus(400).render('login',{
+            return res.status(400).render('login',{
                 message: 'Please Provide an email and password'
             })
         }
@@ -59,26 +59,57 @@ exports.register = (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     const confirmPassword = req.body.password2;
+    
 
-    db.query('SELECT emailid FROM customer WHERE emailid = ?', [email],async (error, results) =>{
+    if(userid==''){
+        return res.render('register',{
+            message: 'Enter the User ID'
+        })
+    } else{ if( phnumber == ''){
+                return res.render('register',{
+                    message: 'Enter The Phone Number'
+                })
+            }
+            else if( email == ''){
+                return res.render('register',{
+                    message: 'Enter The Email'
+                })
+            }
+    }
+
+    db.query('SELECT emailid,phone_number,userid,securityanswer FROM customer WHERE userid = ?', [userid],async (error, results) =>{
         if(error){
             console.log(error);
         }
 
-        if(results.length>0){
+        if(results.length==0){
             return res.render('register',{
-                message: 'email is already in use'
+                message: 'User ID does not exist'
             })
-        } else if( password !== confirmPassword){
+        } 
+        
+        if(phnumber!=results[0].phone_number){
             return res.render('register',{
-                message: 'Passwords do not match'
+                message: 'Enter the Registered Phone Number'
+            })
+        }
+
+        if(email!=results[0].emailid){
+            return res.render('register',{
+                message: 'Enter the Registered Email Address'
+            })
+        }
+
+        if(answer!=results[0].securityanswer){
+            return res.render('register',{
+                message: 'Enter the Correct Security Answer'
             })
         }
 
         let hashedPassword = await bcrypt.hash(password, 8);
         console.log(hashedPassword);
         
-        db.query('INSERT INTO customer SET ?', {userid :userid, phone_number:phnumber, emailid:email, securityanswer:answer, username:username, password:hashedPassword }, (error, results)=>{
+        db.query('UPDATE customer SET ? WHERE userid = ?', [{ phone_number:phnumber, emailid:email, securityanswer:answer, username:username, password:hashedPassword},[userid]], (error, results)=>{
             if(error){
                 console.log(error);
             } else{

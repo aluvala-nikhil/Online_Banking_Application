@@ -100,15 +100,15 @@
                             <div class="title">Please enter the following details</div>
                             <div class="field">
                               <div class="label">User Id</div>
-                              <input type="text" name="userid">
+                              <input class="firstInput1" type="text" name="userid">
                             </div>
                             <div class="field">
                                 <div class="label">Phone Number</div>
-                                <input type="number" name="number">
+                                <input class="firstInput2"  type="number" name="number">
                             </div>
                             <div class="field">
                                 <div class="label">Email Id</div>
-                                <input type="email" name="email">
+                                <input class="firstInput3" type="email" name="email">
                             </div>
                             <div class="field" style="margin-left: 30px;">
                               <button type="submit" class="firstNext next">Next</button>
@@ -118,38 +118,47 @@
                             <div class="title"></div>
                             <div class="field">
                               <div class="label">what is your mother's maiden name?</div>
-                              <textarea style="margin-top: 10px; margin-left: 30px; padding-top: 10px; padding-right: 10px;" name="question"></textarea>
+                              <input class="secondInput1" style="margin-top: 10px; margin-left: 30px; padding-top: 10px; padding-right: 10px;" name="question">
                             </div>
                             <div class="field btns">
                               <button class="prev-1 prev">Previous</button>
-                              <button class="next-1 next">Next</button>
+                              <button class="secondNext next-1 next">Next</button>
+                            </div>
+                            <div class="field">
+                                <div class="label" id="securityAnswer" style="padding-top: 5px; font-weight:bold"></div>
                             </div>
                           </div>
                           <div class="page">
-                            <div class="title">Please enter the User Name</div>
+                            <div class="field">
+                                <div class="title">Please enter the User Name</div>
+                            </div>
                             <div class="field">
                               <div class="label">User Name</div>
-                              <input type="text" name="username">
+                              <input class="thirdInput1" type="text" name="username" required pattern="[a-zA-Z0-9]+">
                             </div>
                             <div class="field btns">
                               <button class="prev-2 prev">Previous</button>
-                              <button class="next-2 next">Next</button>
+                              <button class="thirdNext next-2 next" onclick=next1()>Next</button>
+                            </div>
+                            <div class="field">
+                                <div class="label" id="username" style="padding-top: 5px; font-weight:bold"></div>
                             </div>
                           </div>
                           <div class="page">
                             <div class="title">Password</div>
                             <div class="field">
                               <div class="label">Password</div>
-                              <input type="text" name="password">
+                              <input class="fourthInput1" type="text" name="password">
                             </div>
                             <div class="field">
                               <div class="label">Confirm Password</div>
-                              <input type="password" name="password2">
+                              <input class="fourthInput2" type="password" name="password2">
                             </div>
                             <div class="field btns">
                               <button class="prev-3 prev">Previous</button>
-                              <button class="submit">Submit</button>
+                              <button class="submitButton submit">Submit</button>
                             </div>
+                            <div id="pass"></div>
                           </div>
 
                         </form>
@@ -157,7 +166,7 @@
                       </div>
 
                       {{#if message}}
-                          <h4 class="alert alert-danger mt-4">{{message}}</h4>
+                          <h4 style="padding-left: 30px;padding-top:4px">{{message}}</h4>
                       {{/if}}
 
                 </div>
@@ -180,6 +189,112 @@
                 items: 1
             });
         });
+    </script>
+    <script>
+        let firstInput1 = document.querySelector(".firstInput1");
+        let firstInput2 = document.querySelector(".firstInput2");
+        let firstInput3 = document.querySelector(".firstInput3");
+
+        let secondInput1 = document.querySelector(".secondInput1");
+        
+        let thirdInput1 = document.querySelector(".thirdInput1");
+
+        let fourthInput1 = document.querySelector(".fourthInput1");
+        let fourthInput2 = document.querySelector(".fourthInput2");
+
+        let button1 = document.querySelector(".firstNext");
+        let button2 = document.querySelector(".secondNext");
+        let button3 = document.querySelector(".thirdNext");
+        let submitButton = document.querySelector(".submitButton");
+
+        
+
+        button1.disabled = true; //setting button state to disabled
+        button2.disabled = true;
+        button3.disabled = true;
+        submitButton.disabled = true;
+
+        firstInput1.addEventListener("change", stateHandle1);
+        firstInput2.addEventListener("change", stateHandle1);
+        firstInput3.addEventListener("change", stateHandle1);
+
+        secondInput1.addEventListener("change", stateHandle2);
+
+        thirdInput1.addEventListener("change", stateHandle3);
+
+        fourthInput1.addEventListener("change", stateHandle4);
+        fourthInput2.addEventListener("change", stateHandle4);
+
+        function stateHandle1() {
+          console.log("hello");
+          if (document.querySelector(".firstInput1").value === "" || document.querySelector(".firstInput2").value === "" || document.querySelector(".firstInput3").value === ""  ) {
+            
+            button1.disabled = true; //button remains disabled
+          } else {
+            
+            button1.disabled = false; //button is enabled
+          }
+        }
+
+        function stateHandle2() {
+          if (document.querySelector(".secondInput1").value === "") {
+            
+            button2.disabled = true; //button remains disabled
+          } else {
+            if(/^[a-z]+$/i.test(document.querySelector(".secondInput1").value)){
+                document.getElementById("securityAnswer").innerHTML="";
+                button2.disabled = false; //button is enabled
+
+            }
+            else{
+              button2.disabled = true;
+              document.getElementById("securityAnswer").innerHTML="Security Answer must be in Characters";
+            }
+            
+          }
+        }
+
+        function stateHandle3() {
+          if (document.querySelector(".thirdInput1").value === "") {
+           
+            button3.disabled = true; //button remains disabled
+          } else {
+
+            if(/^[a-zA-Z0-9]+$/i.test(document.querySelector(".thirdInput1").value)){
+                document.getElementById("username").innerHTML="";
+                button3.disabled = false; //button is enabled
+
+            }
+            else{
+              button3.disabled = true;
+              document.getElementById("username").innerHTML="Username must be Aplhanumeric";
+            }
+          }
+        }
+
+        function stateHandle4() {
+          
+          if (document.querySelector(".fourthInput1").value === "" && document.querySelector(".fourthInput2").value === ""  ) {
+              document.getElementById("pass").innerHTML="";
+              submitButton.disabled = true; //button remains disabled
+          } else {
+              if (document.querySelector(".fourthInput1").value.length >= 8) {
+                  document.getElementById("pass").innerHTML=""
+                  if((document.querySelector(".fourthInput1").value !== document.querySelector(".fourthInput2").value) ){
+                      document.getElementById("pass").innerHTML="Password do not match";
+                      submitButton.disabled = true;
+                  }
+                  else{ 
+                      document.getElementById("pass").innerHTML="";
+                      submitButton.disabled = false;
+                  }
+              } else {
+                document.getElementById("pass").innerHTML="Password Should be minimum of 8 characters"
+                submitButton.disabled = true; //button is enabled
+              }
+          }
+        }
+
     </script>
 
     <script src="/reg-script/script.js"></script>
