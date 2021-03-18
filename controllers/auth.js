@@ -92,6 +92,11 @@ exports.register = (req, res) => {
                 message: 'User ID does not exist'
             })
         } 
+        if(results[0].username!=''){
+            return res.render('register',{
+                message: 'Userid already registerd'
+            })
+        }
 
         if(phnumber!=results[0].phone_number){
             return res.render('register',{
