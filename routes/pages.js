@@ -32,16 +32,6 @@ router.get('/profile', function(req, res) {
     }
 });
 
-router.get('/profile-updated', function(req, res) {
-    if(req.session.loggedinUser){
-        
-        db.query('SELECT * FROM customer WHERE emailid=?',[req.session.emailid], function (err, data) {
-            if (err) throw err;
-            res.render('profileManagement', { name: data[0].name, address: data[0].address, dob: data[0].dob, mobile: data[0].phone_number,message : request.flash("message") });
-        });
-    }else{
-        res.redirect('/login');
-    }
-});
+
 
 module.exports=router;

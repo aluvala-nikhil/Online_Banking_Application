@@ -165,13 +165,13 @@ exports.profile = (req,res)=> {
                         if(error){
                             console.log(error);
                         } else{
-                            request.flash('message','Updated Successfully')
-                            res.status(200).redirect("/profile-updated")
+                            
+                            res.status(200).redirect("/profile")
                         }
                     });
                 } else{
-                    request.flash('message','Entered password is wrong')
-                    res.status(200).redirect("/profile-updated")
+                    
+                    res.status(200).redirect("/profile")
                 }
             })
     
