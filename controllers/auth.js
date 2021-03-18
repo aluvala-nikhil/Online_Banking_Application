@@ -43,6 +43,7 @@ exports.login = async(req,res) => {
 
                 req.session.loggedinUser= true;
                 req.session.emailid = email;
+                req.session.userid = results[0].userid;
 
                 res.status(200).redirect("/main")
             }
@@ -91,6 +92,7 @@ exports.register = (req, res) => {
                 message: 'User ID does not exist'
             })
         } 
+        
         if(results[0].username!=''){
             return res.render('register',{
                 message: 'Userid already registerd'

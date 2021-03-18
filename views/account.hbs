@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Displays site properly based on user's device -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/account-img/images/favicon-32x32.png">
     <title>Account Management</title>
 
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/account-css/style.css">
 </head>
 <body>
     <header style="position: absolute;">
@@ -28,7 +28,7 @@
             <div class="image__wrapper_inner">
 
             </div>
-            <img class="box" src="./images/illustration-box-desktop.svg" alt="box">
+            <img class="box" src="/account-img/images/illustration-box-desktop.svg" alt="box">
         </div>
         <div class="accordion__wrapper">
             <h1 class="title__accordion">Account Management</h1>
@@ -38,13 +38,13 @@
                         <h3 class="title__question">
                             Savings
                         </h3>
-                        <img src="./images/icon-arrow-down.svg" >
+                        <img src="/account-img/images/icon-arrow-down.svg" >
                     </div>
                     <div class="answer">
-                        Account Number: 1111 2222 3333 4444
+                        Account Number: {{savingsAccountno}}
                     </div>
                     <div class="answer">
-                        Balance: Rs. 10,10,100
+                        Balance: Rs. {{savingsBalance}}
                     </div>
                     <div class="answer">
                         <a class="logout" href="#"><button>Delete</button></a>
@@ -56,13 +56,13 @@
                         <h3 class="title__question">
                             Current
                         </h3>
-                        <img src="./images/icon-arrow-down.svg" >
+                        <img src="/account-img/images/icon-arrow-down.svg" >
                     </div>
                     <div class="answer">
-                        Account Number: 1111 2222 3333 4444
+                        Account Number: {{currentAccountno}}
                     </div>
                     <div class="answer">
-                        Balance: Rs. 10,10,100
+                        Balance: Rs. {{currentBalance}}
                     </div>
                     <div class="answer">
                         <a class="logout" href="#"><button>Delete</button></a>
@@ -74,13 +74,13 @@
                         <h3 class="title__question">
                             Home Loan
                         </h3>
-                        <img src="./images/icon-arrow-down.svg" >
+                        <img src="/account-img/images/icon-arrow-down.svg" >
                     </div>
                     <div class="answer">
-                        Account Number: 1111 2222 3333 4444
+                        Account Number: {{loanAccountno}}
                     </div>
                     <div class="answer">
-                        Balance: Rs. 10,10,100
+                        Balance: Rs. {{loanBalance}}
                     </div>
                     <div class="answer">
                         <a class="logout" href="#"><button>Delete</button></a>
@@ -92,13 +92,13 @@
                         <h3 class="title__question">
                             Credit Card
                         </h3>
-                        <img src="./images/icon-arrow-down.svg" >
+                        <img src="/account-img/images/icon-arrow-down.svg" >
                     </div>
                     <div class="answer">
-                        Account Number: 1111 2222 3333 4444
+                        Account Number: {{creditAccountno}}
                     </div>
                     <div class="answer">
-                        Balance: Rs. 10,10,100
+                        Balance: Rs. {{creditBalance}}
                     </div>
                     <div class="answer">
                         <a class="logout" href="#"><button>Delete</button></a>
@@ -110,6 +110,6 @@
         </div>
     </main>
     
-    <script src="./script.js"></script>
+    <script src="/account-script/script.js"></script>
 </body>
 </html>

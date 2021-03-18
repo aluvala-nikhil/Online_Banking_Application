@@ -32,4 +32,19 @@ router.get('/profile', function(req, res) {
     }
 });
 
+router.get('/account', function(req, res) {
+    if(req.session.loggedinUser){
+        
+        db.query('SELECT * FROM accounts WHERE userid=? AND category= "savings"',[req.session.userid], function (err, data) {
+            if (err) throw err;
+            res.render('account', { savingsAccountno: data[0].accountno, savingsBalance: data[0].balance});
+        });
+
+        
+
+    }else{
+        res.redirect('/login');
+    }
+});
+
 module.exports=router;
