@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { request } = require("express");
 
 
 const db = mysql.createConnection({
@@ -151,23 +152,35 @@ exports.profile = (req,res)=> {
         });
     }
     else{
-        db.query('SELECT password from Customer where emailid=?',[req.session.emailid],async (error, results) =>{
-            if(error){
-                console.log(error);
-            } else{
-                if(current_password==results[0]){
+        
+        
+        try{
+           
+    
+            db.query('SELECT password FROM customer WHERE emailid=?',[req.session.emailid], async(error, results) =>{
+                
+                if((await bcrypt.compare(current_password,results[0].password))) {
                     let hashedPassword = await bcrypt.hash(new_password, 8);
                     db.query('UPDATE customer SET ? WHERE emailid = ?', [{ name:name,dob:dob,phone_number:phnumber,address:address,password:hashedPassword},[req.session.emailid]],async (error, results) =>{
                         if(error){
                             console.log(error);
                         } else{
-                            
-                            res.status(200).redirect("/profile")
+                            request.flash('message','Updated Successfully')
+                            res.status(200).redirect("/profile-updated")
                         }
                     });
+                } else{
+                    request.flash('message','Entered password is wrong')
+                    res.status(200).redirect("/profile-updated")
                 }
-            }
-        });
+            })
+    
+        }catch(error){
+            console.log(error);
+        }
+
+        
+
     }
     
     

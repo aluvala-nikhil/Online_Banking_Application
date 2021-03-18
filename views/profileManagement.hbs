@@ -11,8 +11,11 @@
     <!-- Custom Style-->
     <link rel="stylesheet" href="/profile-css/style.css">
 </head>
+{{#if message}}
+                          {{message}}
+                      {{/if}}
 <body>
-
+  
 
   <div class="container bootstrap snippets bootdeys">
   <div class="row">
@@ -85,7 +88,9 @@
                 <button type="reset" class="btn btn-default"><a href="main.hbs">Cancel</a></button>
               </div>
             </div>
-            
+           
+                         
+                      
           </div>
         </div>
         <div id="pass"></div>
