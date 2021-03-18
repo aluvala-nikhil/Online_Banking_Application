@@ -41,10 +41,9 @@ exports.login = async(req,res) => {
 
                 res.cookie('jwt', token, cookiesOptions);
 
-                sess = req.session;
-                sess.email = req.body.email;
-                sess.userid = results[0].userid;
-                console.log(sess);
+                req.session.loggedinUser= true;
+                req.session.emailid = email;
+
                 res.status(200).redirect("/main")
             }
         })
@@ -92,6 +91,7 @@ exports.register = (req, res) => {
                 message: 'User ID does not exist'
             })
         } 
+        
 
         if(phnumber!=results[0].phone_number){
             return res.render('register',{
@@ -127,3 +127,4 @@ exports.register = (req, res) => {
     });
      
 }
+
