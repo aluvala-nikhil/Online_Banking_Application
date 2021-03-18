@@ -3,6 +3,7 @@ const path=require("path");
 const mysql=require("mysql");
 const dotenv=require("dotenv");
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 dotenv.config({path: './.env'});
 
@@ -21,8 +22,10 @@ app.use(express.static(publicDirectory));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(cookieParser());
+app.use(session({secret: process.env.JWT_SECRET,saveUninitialized: true,resave: false}));
 
 app.set('view engine', 'hbs');
+
 
 db.connect((error)=> {
     if(error){
@@ -32,9 +35,11 @@ db.connect((error)=> {
     }
 })
 
+var sess;
 
 app.use('/', require('./routes/pages'));
-app.use('/auth', require('./routes/auth'))
+app.use('/auth', require('./routes/auth'));
+
 
 app.listen(5001,()=>{
     console.log("Server Started");

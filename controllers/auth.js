@@ -26,7 +26,7 @@ exports.login = async(req,res) => {
                     message:'Email or Password is incorrect'
                 })
             } else{
-                const id =results[0].id;
+                const id =results[0].userid;
 
                 const token = jwt.sign({id :id}, process.env.JWT_SECRET,{
                     expiresIn: process.env.JWT_EXPIRES_IN
@@ -40,7 +40,11 @@ exports.login = async(req,res) => {
                 }
 
                 res.cookie('jwt', token, cookiesOptions);
-                res.status(200).redirect("/")
+
+                req.session.loggedinUser= true;
+                req.session.emailid = email;
+
+                res.status(200).redirect("/main")
             }
         })
 
@@ -87,7 +91,12 @@ exports.register = (req, res) => {
                 message: 'User ID does not exist'
             })
         } 
-        
+        if(results[0].username!=''){
+            return res.render('register',{
+                message: 'Userid already registerd'
+            })
+        }
+
         if(phnumber!=results[0].phone_number){
             return res.render('register',{
                 message: 'Enter the Registered Phone Number'
@@ -122,3 +131,4 @@ exports.register = (req, res) => {
     });
      
 }
+
