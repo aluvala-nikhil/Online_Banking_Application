@@ -2,6 +2,7 @@ const mysql = require("mysql");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
+
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,
@@ -20,7 +21,6 @@ exports.login = async(req,res) => {
         }
 
         db.query('SELECT * FROM customer WHERE emailid=?',[email], async(error, results) =>{
-            console.log(results);
             if( !results || !(await bcrypt.compare(password,results[0].password))) {
                 res.status(401).render('login',{
                     message:'Email or Password is incorrect'
@@ -54,7 +54,7 @@ exports.login = async(req,res) => {
 }
 
 exports.register = (req, res) => {
-    console.log(req.body);
+    
 
     const userid = req.body.userid;
     const phnumber = req.body.number;
@@ -116,19 +116,60 @@ exports.register = (req, res) => {
         }
 
         let hashedPassword = await bcrypt.hash(password, 8);
-        console.log(hashedPassword);
         
-        db.query('UPDATE customer SET ? WHERE userid = ?', [{ phone_number:phnumber, emailid:email, securityanswer:answer, username:username, password:hashedPassword},[userid]], (error, results)=>{
+        db.query('UPDATE customer SET ? WHERE userid = ?', [{ username:username, password:hashedPassword},[userid]], (error, results)=>{
             if(error){
                 console.log(error);
             } else{
-                console.log(results);
                 return res.render('register',{
                     message: 'User Registered'
                 })
+                
             }
         })
     });
      
+}
+
+exports.profile = (req,res)=> {
+
+    const name = req.body.name;
+    const dob = req.body.dob;
+    const phnumber = req.body.mobile;
+    const address = req.body.address;
+    const current_password = req.body.current_password;
+    const new_password = req.body.new_password;
+    if(current_password==new_password && current_password==''){
+        
+        db.query('UPDATE customer SET ? WHERE emailid = ?', [{ name:name,dob:dob,phone_number:phnumber,address:address},[req.session.emailid]],async (error, results) =>{
+            if(error){
+                console.log(error);
+            } else{
+                
+                res.status(200).redirect("/profile")
+            }
+        });
+    }
+    else{
+        db.query('SELECT password from Customer where emailid=?',[req.session.emailid],async (error, results) =>{
+            if(error){
+                console.log(error);
+            } else{
+                if(current_password==results[0]){
+                    let hashedPassword = await bcrypt.hash(new_password, 8);
+                    db.query('UPDATE customer SET ? WHERE emailid = ?', [{ name:name,dob:dob,phone_number:phnumber,address:address,password:hashedPassword},[req.session.emailid]],async (error, results) =>{
+                        if(error){
+                            console.log(error);
+                        } else{
+                            
+                            res.status(200).redirect("/profile")
+                        }
+                    });
+                }
+            }
+        });
+    }
+    
+    
 }
 
