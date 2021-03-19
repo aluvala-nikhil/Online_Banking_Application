@@ -167,13 +167,18 @@ exports.profile = (req,res)=> {
                         if(error){
                             console.log(error);
                         } else{
+                            db.query('SELECT * FROM customer WHERE emailid=?',[req.session.emailid], function (err, data) {
+                                if (err) throw err;
+                                res.render('profileManagement', { name: data[0].name, address: data[0].address, dob: data[0].dob, mobile: data[0].phone_number,message:'Password Updated' });
+                            });
                             
-                            res.status(200).redirect("/profile")
                         }
                     });
                 } else{
-                    
-                    res.status(200).redirect("/profile")
+                    db.query('SELECT * FROM customer WHERE emailid=?',[req.session.emailid], function (err, data) {
+                        if (err) throw err;
+                        res.render('profileManagement', { name: data[0].name, address: data[0].address, dob: data[0].dob, mobile: data[0].phone_number,message:'Entered Current Password is wrong' });
+                    });
                 }
             })
     

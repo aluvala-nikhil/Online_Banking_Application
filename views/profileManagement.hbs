@@ -91,7 +91,12 @@
                       
           </div>
           {{#if message}}
-            <script>alert("hello moto")</script>
+            <input type="text" class="alertText" value="{{message}}" style="display: none;">
+            <script>
+              let msg = document.querySelector(".alertText").value;
+              document.location.href = "http://localhost:5001/profile";
+              window.alert(msg);
+            </script>
           {{/if}}
           
         </div>
@@ -113,8 +118,7 @@
   current_password.addEventListener("change", stateHandle4);
   new_password.addEventListener("change", stateHandle4);
 
-
-
+  
   function stateHandle4() {
             if(document.querySelector(".current_password").value == document.querySelector(".new_password").value && document.querySelector(".current_password").value =="" ){
               document.getElementById("pass").innerHTML=""
