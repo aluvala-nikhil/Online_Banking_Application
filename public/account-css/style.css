@@ -36,7 +36,7 @@ body {
   display: grid;
   grid-template-columns: 400px 1fr;
   grid-gap: 6rem;
-  background-image: url(./images/bg-pattern-desktop.svg);
+  background-image: url(../account-img/images/bg-pattern-desktop.svg);
   background-repeat: no-repeat;
   background-position: 1260% 65%;
   
@@ -106,7 +106,7 @@ body {
 }
 
 .image__wrapper_inner {
-  background: url(./images/illustration-woman-online-desktop.svg);
+  background: url(../account-img/images/illustration-woman-online-desktop.svg);
   height: 100%;
   background-repeat: no-repeat;
   background-position: 120% center;
@@ -123,7 +123,7 @@ body {
 
 header {
   background-color: #1c1c1c;
-  padding: 15px;
+  padding: 10px;
   display: inline-flex;
   justify-content: space-between;
   text-align: center;
@@ -146,8 +146,8 @@ header li a {
   text-decoration: none;
   padding: 13px;
   transition: 0.3s ease;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 17px;
+  
 }
 
 header li a:hover,
@@ -185,7 +185,7 @@ button:hover {
     height: 530px;
   }
   .image__wrapper {
-    background: url("./images/bg-pattern-mobile.svg");
+    background: url("../account-img/images/bg-pattern-mobile.svg");
     background-repeat: no-repeat;
     background-position: center 590%;
   }

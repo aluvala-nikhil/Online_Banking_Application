@@ -90,6 +90,15 @@
                          
                       
           </div>
+          {{#if message}}
+            <input type="text" class="alertText" value="{{message}}" style="display: none;">
+            <script>
+              let msg = document.querySelector(".alertText").value;
+              document.location.href = "http://localhost:5001/profile";
+              window.alert(msg);
+            </script>
+          {{/if}}
+          
         </div>
         <div id="pass"></div>
       </form>
