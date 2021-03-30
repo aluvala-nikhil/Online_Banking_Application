@@ -5,6 +5,7 @@ const dotenv=require("dotenv");
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+
 dotenv.config({path: './.env'});
 
 const app = express();
@@ -23,6 +24,8 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(session({secret: process.env.JWT_SECRET,saveUninitialized: true,resave: false}));
+
+
 
 app.set('view engine', 'hbs');
 

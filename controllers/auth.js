@@ -1,6 +1,8 @@
 const mysql = require("mysql");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { request } = require("express");
+
 
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
@@ -20,7 +22,6 @@ exports.login = async(req,res) => {
         }
 
         db.query('SELECT * FROM customer WHERE emailid=?',[email], async(error, results) =>{
-            console.log(results);
             if( !results || !(await bcrypt.compare(password,results[0].password))) {
                 res.status(401).render('login',{
                     message:'Email or Password is incorrect'
@@ -43,6 +44,7 @@ exports.login = async(req,res) => {
 
                 req.session.loggedinUser= true;
                 req.session.emailid = email;
+                req.session.userid = results[0].userid;
 
                 res.status(200).redirect("/main")
             }
@@ -54,7 +56,7 @@ exports.login = async(req,res) => {
 }
 
 exports.register = (req, res) => {
-    console.log(req.body);
+    
 
     const userid = req.body.userid;
     const phnumber = req.body.number;
@@ -91,6 +93,7 @@ exports.register = (req, res) => {
                 message: 'User ID does not exist'
             })
         } 
+        
         if(results[0].username!=''){
             return res.render('register',{
                 message: 'Userid already registerd'
@@ -116,19 +119,77 @@ exports.register = (req, res) => {
         }
 
         let hashedPassword = await bcrypt.hash(password, 8);
-        console.log(hashedPassword);
         
-        db.query('UPDATE customer SET ? WHERE userid = ?', [{ phone_number:phnumber, emailid:email, securityanswer:answer, username:username, password:hashedPassword},[userid]], (error, results)=>{
+        db.query('UPDATE customer SET ? WHERE userid = ?', [{ username:username, password:hashedPassword},[userid]], (error, results)=>{
             if(error){
                 console.log(error);
             } else{
-                console.log(results);
                 return res.render('register',{
                     message: 'User Registered'
                 })
+                
             }
         })
     });
      
+}
+
+exports.profile = (req,res)=> {
+
+    const name = req.body.name;
+    const dob = req.body.dob;
+    const phnumber = req.body.mobile;
+    const address = req.body.address;
+    const current_password = req.body.current_password;
+    const new_password = req.body.new_password;
+    if(current_password==new_password && current_password==''){
+        
+        db.query('UPDATE customer SET ? WHERE emailid = ?', [{ name:name,dob:dob,phone_number:phnumber,address:address},[req.session.emailid]],async (error, results) =>{
+            if(error){
+                console.log(error);
+            } else{
+                
+                res.status(200).redirect("/profile")
+            }
+        });
+    }
+    else{
+        
+        
+        try{
+           
+    
+            db.query('SELECT password FROM customer WHERE emailid=?',[req.session.emailid], async(error, results) =>{
+                
+                if((await bcrypt.compare(current_password,results[0].password))) {
+                    let hashedPassword = await bcrypt.hash(new_password, 8);
+                    db.query('UPDATE customer SET ? WHERE emailid = ?', [{ name:name,dob:dob,phone_number:phnumber,address:address,password:hashedPassword},[req.session.emailid]],async (error, results) =>{
+                        if(error){
+                            console.log(error);
+                        } else{
+                            db.query('SELECT * FROM customer WHERE emailid=?',[req.session.emailid], function (err, data) {
+                                if (err) throw err;
+                                res.render('profileManagement', { name: data[0].name, address: data[0].address, dob: data[0].dob, mobile: data[0].phone_number,message:'Password Updated' });
+                            });
+                            
+                        }
+                    });
+                } else{
+                    db.query('SELECT * FROM customer WHERE emailid=?',[req.session.emailid], function (err, data) {
+                        if (err) throw err;
+                        res.render('profileManagement', { name: data[0].name, address: data[0].address, dob: data[0].dob, mobile: data[0].phone_number,message:'Entered Current Password is wrong' });
+                    });
+                }
+            })
+    
+        }catch(error){
+            console.log(error);
+        }
+
+        
+
+    }
+    
+    
 }
 
