@@ -83,7 +83,7 @@ exports.register = (req, res) => {
             }
     }
 
-    db.query('SELECT emailid,phone_number,userid,securityanswer FROM customer WHERE userid = ?', [userid],async (error, results) =>{
+    db.query('SELECT emailid,phone_number,userid,securityanswer,username FROM customer WHERE userid = ?', [userid],async (error, results) =>{
         if(error){
             console.log(error);
         }
@@ -94,9 +94,9 @@ exports.register = (req, res) => {
             })
         } 
         
-        if(results[0].username!=''){
+        if(results[0].username!=NULL){
             return res.render('register',{
-                message: 'Userid already registerd'
+                message: 'Userid already registered'
             })
         }
 
@@ -189,6 +189,39 @@ exports.profile = (req,res)=> {
         
 
     }
+    
+    
+}
+exports.inbox = (req,res) =>{
+    
+    if(req.body.del == "N"){
+        db.query("SELECT unread from messages where message_id =?",[req.body.id], function(err,data){
+            if (data[0].unread=="Y"){
+                db.query("UPDATE messages SET unread=? where message_id=?",[["N"],[req.body.id]], function(err,data){
+                    if (err) throw err;
+                    res.status(200).redirect("/inbox")
+                })
+            }
+            else {
+                db.query("UPDATE messages SET unread=? where message_id=?",[["Y"],[req.body.id]], function(err,data){
+                    if (err) throw err;
+                    res.status(200).redirect("/inbox")
+                })
+            }
+            
+        })
+    }
+    else{
+        
+        for(i=0;i<req.body['array[]'].length;i++){
+            db.query("DELETE from messages where message_id=?",[req.body['array[]'][i]], function(err,data){
+                if (err) throw err;
+            })
+        }
+        console.log("hi")
+        res.status(200).redirect("/inbox")
+    }
+    
     
     
 }

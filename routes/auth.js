@@ -9,4 +9,6 @@ router.post('/login', authController.login);
 
 router.post('/profile',authController.profile);
 
+router.post('/inbox',authController.inbox);
+
 module.exports=router; 

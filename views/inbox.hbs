@@ -7,6 +7,8 @@
     <title>Messages</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style type="text/css">
     	body{
     background:#eee;
@@ -17,56 +19,55 @@
 
 
 header {
-    background-color: #1c1c1c;
-    padding: 15px;
-    display: inline-flex;
-    justify-content: space-between;
-    text-align: center;
-    box-shadow: 0 0 3px royalblue;
-    width: 100%;
-	margin-bottom: 50px;
-}
-  
-.logo {
-    color: #fff;
-    padding-left: 20px;
-    font-weight: bold;
+  background-color: #1c1c1c;
+  padding: 10px;
+  display: inline-flex;
+  justify-content: space-between;
+  text-align: center;
+  box-shadow: 0 0 3px royalblue;
+  width: 100%;
 }
 
+.logo {
+  color: #fff;
+  padding-left: 20px;
+  font-weight: bold;
+}
 header li {
-    display: inline;
-    padding-left: 40px;
+  display: inline;
+  padding-left: 40px;
 }
-  
+
 header li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 13px;
-    transition: 0.3s ease;
-    font-size: 20px;
-    font-weight: bold;
-}
+  color: #fff;
+  text-decoration: none;
+  padding: 13px;
+  transition: 0.3s ease;
+  font-size: 17px;
   
+}
+
 header li a:hover,
 .active {
-    color: royalblue;
+  color: royalblue;
 }
-  
+
 button {
-    padding: 9px 25px;
-    background-color: rgba(105, 133, 214, 0.748);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-    font-size: 15px;
-    margin-top: 13px;
-    margin-right: 30px;
+  padding: 9px 25px;
+  background-color: rgba(105, 133, 214, 0.748);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  font-size: 15px;
+  margin-top: 13px;
+  margin-right: 13px;
 }
-  
- button:hover {
-    background-color: #4169e1;
+
+button:hover {
+  background-color: #4169e1;
 }
+
   
 /*header*/
 
@@ -343,19 +344,18 @@ button {
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <header>
-	<div class="logo">
-		<h2>Online Banking</h2>
-	</div>
-<ul style="margin-top: 20px;">
-  <li><a href="#" class="active">Home</a></li>
-  <li><a href="#">Home</a></li>
-  <li><a href="#">Home</a></li>
-  <li><a href="#">Home</a></li>
-  <li><a href="#">Home</a></li>
-  <li><a href="#">Home</a></li>
-</ul>
-	<a class="logout" href="#" style="color: #111;"><button>Logout</button></a>
-</header>
+		<div class="logo">
+			<h2 style="font-size:20px">Online Banking</h2>
+		</div>
+        <ul>
+            <li><a href="/main" >Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="#" class="active">Account</a></li>
+            <li><a href="#">Notification</a></li>
+            <li><a href="#">Home</a></li>
+        </ul>
+        <a class="logout" href="#"><button>Logout</button></a>
+    </header>
 <div class="container">
 <div class="row">
 	<!-- BEGIN INBOX -->
@@ -392,7 +392,7 @@ button {
 										Action <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu" role="menu">
-										<li><a href="#">Delete</a></li>
+										<li><a href="#" onclick="delmsg()">Delete</a></li>
 									</ul>
 								</div>
 							</div>
@@ -404,22 +404,16 @@ button {
 						<div class="popup" id="popup-1">
 							<div class="overlay"></div>
 							<div class="content">
-							  <div class="close-btn" onclick="togglePopup()">&times;</div>
-							  <h1>Title</h1>
-							  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo aspernatur laborum rem sed laudantium excepturi veritatis voluptatum architecto, dolore quaerat totam officiis nisi animi accusantium alias inventore nulla atque debitis.</p>
+							  <div class="close-btn" onclick="togglePopup(0)">&times;</div>
+							  <p id="message1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo aspernatur laborum rem sed laudantium excepturi veritatis voluptatum architecto, dolore quaerat totam officiis nisi animi accusantium alias inventore nulla atque debitis.</p>
 							</div>
 						</div>
 						
 						<div class="table-responsive">
 							<table class="table">
-								<tbody><tr>
-									<td class="action"><input type="checkbox" /></td>
-									<td class="action"><i class="fa fa-star-o"></i></td>
-									<td class="action"><i class="fa fa-bookmark-o"></i></td>
-									<td class="name"><a href="#" onclick="togglePopup()">Larry Gardner</a></td>
-									<td class="subject"><a href="#" onclick="togglePopup()">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-									<td class="time">08:30 PM</td>
-								</tr>
+								<tbody id="messages">
+									
+									
 								<tr>
 									<td class="action"><input type="checkbox" /></td>
 									<td class="action"><i class="fa fa-star-o"></i></td>
@@ -552,16 +546,102 @@ button {
 	</div>
 	<!-- END INBOX -->
 </div>
+<input type="text" class="inboxData" value="{{data}}" style="display: none;">
 </div>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
-function togglePopup(){
-  document.getElementById("popup-1").classList.toggle("active");
+function togglePopup(value,id,ele){
+	document.getElementById("message1").innerHTML= data[value].message;
+	document.getElementById("popup-1").classList.toggle("active");
+	if(ele.parentElement.parentElement.className==""){
+		ele.parentElement.parentElement.className="read"
+		ele.parentElement.parentElement.childNodes[2].childNodes[0].className="fa fa-envelope-open-o"
+		update(id)
+	}
 }
-	          	
+function update(id){
+	event.preventDefault();
 	
+
+    $.ajax({
+        type: 'POST',
+        url: "/auth/inbox",
+        data: { id:id , del :"N" },
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (request, status, error) {
+            serviceError();
+        }
+    });
+}
+function readtoggle(value,id,ele){
+	if(ele.parentElement.parentElement.className=="read"){
+		ele.parentElement.parentElement.className=""
+		ele.className="fa fa-envelope-o"
+		update(id)
+		
+	}
+	
+	
+}
+function delmsg(){
+	var markedCheckbox = document.getElementsByName('sel');  
+	for (var checkbox of markedCheckbox) {  
+    	if (checkbox.checked)  {
+			list.push(checkbox.id)
+		}
+	}
+	del(list)
+	list=[]
+}
+function del(list){
+	event.preventDefault();
+	console.log(list)
+    $.ajax({
+        type: 'POST',
+        url: "/auth/inbox",
+        data: { array:list , del :"Y" },
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (request, status, error) {
+            serviceError();
+        }
+    });
+	
+}	
+</script>
+<script>
+	var data= JSON.parse(document.querySelector(".inboxData").value);
+	var block="";
+	var flag=0;
+	list=[];
+	icon=""
+	for(i=0; i<data.length;i++){
+		 flag=1;
+		 unread=data[i].unread
+		 if(unread=="Y"){
+			 value=""
+			 icon="fa fa-envelope-o"
+		 }
+		 else{
+			 value="read"
+			 icon="fa fa-envelope-open-o"
+		 }
+		 data[i].date = new Date(data[i].date);
+         data[i].date= data[i].date.getFullYear()+'-' + (data[i].date.getMonth()+1) + '-'+data[i].date.getDate();
+
+		 block+='<tr class='+value+'><td class="action"><input type="checkbox" id='+data[i].message_id+' name="sel"/></td><td class="action"><i class="fa fa-star-o"></i></td><td class="action"><i class="'+icon+'" onclick="readtoggle('+i+','+data[i].message_id+',this);"></i></td><td class="time">'+data[i].date+'</td><td class="subject"><a href="#" onclick="togglePopup('+i+','+data[i].message_id+',this)" maxlength="40">'+data[i].message+'</a></td><td class="time">'+data[i].time+'</td></tr>'
+		 console.log(block)
+	}
+	if (flag==1){
+            document.getElementById("messages").innerHTML=block;
+    }
+	
+
 </script>
 </body>
 </html>
