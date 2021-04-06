@@ -135,7 +135,7 @@ exports.register = (req, res) => {
             })
         } 
         
-        if(results[0].username!=NULL){
+        if(results[0].username!=""){
             return res.render('register',{
                 message: 'Userid already registered'
             })
