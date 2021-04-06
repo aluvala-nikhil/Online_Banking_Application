@@ -9,11 +9,23 @@ router.get('/',(req,res) => {
 })
 
 router.get('/register',(req,res) => {
+    if(req.session.loggedinUser){
+
+        res.render('main');
+        }
+    else{
     res.render('register');
+    }
 })
 
 router.get('/login',(req,res) => {
+    if(req.session.loggedinUser){
+
+        res.render('main');
+    }
+    else{
     res.render('login');
+    }
 })
 
 router.get('/main',(req,res) => {

@@ -414,7 +414,7 @@ button:hover {
 								<tbody id="messages">
 									
 									
-								No messages
+								
 							</tbody></table>
 						</div>
 
@@ -541,8 +541,10 @@ function del(list){
 	var flag=0;
 	list=[];
 	icon=""
+	if(data.length == 0){
+		block="<tr>No messages</tr>"
+	}
 	for(i=0; i<data.length;i++){
-		 flag=1;
 		 unread=data[i].unread
 		 if(unread=="Y"){
 			 value=""
@@ -558,9 +560,9 @@ function del(list){
 		 block+='<tr class='+value+'><td class="action"><input type="checkbox" id='+data[i].message_id+' name="sel"/></td><td class="action"><i class="fa fa-star-o"></i></td><td class="action"><i class="'+icon+'" onclick="readtoggle('+i+','+data[i].message_id+',this);"></i></td><td class="time">'+data[i].date+'</td><td class="subject"><a href="#" onclick="togglePopup('+i+','+data[i].message_id+',this)" maxlength="40">'+data[i].message+'</a></td><td class="time">'+data[i].time+'</td></tr>'
 		 console.log(block)
 	}
-	if (flag==1){
-            document.getElementById("messages").innerHTML=block;
-    }
+	
+    document.getElementById("messages").innerHTML=block;
+   
 	
 
 </script>
