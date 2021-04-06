@@ -4,11 +4,79 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home </title>
+    <title>Main Page</title>
+
+    <style>
+		body{
+    background-color: #d5d4d4b4;
+    margin: 0;
+}
+
+:root {
+    --primary-gradient: linear-gradient(to right, #4e4376, #2b5876);
+    --mango-gradient: linear-gradient(135deg, #71b7e6, #9b59b6);
+    --text-color: #F7F9f9;
+    --Montserrat: "Montserrat", cursive;
+    --Lobster: "Lobster", cursive;
+    --primary-shadow: 3px 4px 7px rgba(27, 27, 27, 0.534);
+    --border-color: rgba(0,0,0,0.329);
+}
+
+/*header*/
+
+
+header {
+    background-color: #1c1c1c;
+    padding: 10px;
+    display: inline-flex;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0 0 3px royalblue;
+    width: 100%;
+  }
+  
+  .logo {
+    color: #fff;
+    padding-left: 20px;
+    font-weight: bold;
+  }
+  header li {
+    display: inline;
+    padding-left: 40px;
+  }
+  
+  header li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 13px;
+    transition: 0.3s ease;
+    font-size: 17px;
     
-    <!-- linking css-->
-    <link rel="stylesheet" href="/main-css/style.css">
-	<link rel="stylesheet" href="/login-css/Style.css">
+  }
+  
+  header li a:hover,
+  .active {
+    color: royalblue;
+  }
+  
+  button {
+    padding: 9px 25px;
+    background-color: rgba(105, 133, 214, 0.748);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    font-size: 15px;
+    margin-top: 13px;
+    margin-right: 13px;
+  }
+  
+  button:hover {
+    background-color: #4169e1;
+  }
+  
+  /*header*/
+	</style>
 </head>
 <body>
 
@@ -30,9 +98,6 @@
 		<a class="cta" href="#" style="padding-right: 50px;"><button>Logout</button></a>
 	</header>
 
-    
-
 	<!-- /Navigation bar -->
-    
 </body>
 </html>
