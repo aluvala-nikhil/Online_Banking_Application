@@ -13,7 +13,7 @@ const db = mysql.createConnection({
 
 exports.login = async(req,res) => {
     try{
-        const {email, password} =req.body;
+        const {email,password} =req.body;
 
         if(!email || !password){
             return res.status(400).render('login',{
@@ -22,38 +22,79 @@ exports.login = async(req,res) => {
         }
 
         db.query('SELECT * FROM customer WHERE emailid=?',[email], async(error, results) =>{
-            if( !results || !(await bcrypt.compare(password,results[0].password))) {
-                res.status(401).render('login',{
-                    message:'Email or Password is incorrect'
-                })
-            } else{
-                const id =results[0].userid;
-
-                const token = jwt.sign({id :id}, process.env.JWT_SECRET,{
-                    expiresIn: process.env.JWT_EXPIRES_IN
-                });
-
-                const cookiesOptions = {
-                    expires: new Date(
-                        Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60
-                    ),
-                    httpOnly:true
+            if(results.length != 0){
+                console.log(results)
+                if( !results || !(await bcrypt.compare(password,results[0].password))) {
+                    res.status(401).render('login',{
+                        message:'Email or Password is incorrect'
+                    })
+                } else{
+                    const id =results[0].userid;
+            
+                    const token = jwt.sign({id :id}, process.env.JWT_SECRET,{
+                        expiresIn: process.env.JWT_EXPIRES_IN
+                    });
+            
+                    const cookiesOptions = {
+                        expires: new Date(
+                            Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60
+                        ),
+                        httpOnly:true
+                    }
+            
+                    res.cookie('jwt', token, cookiesOptions);
+            
+                    req.session.loggedinUser= true;
+                    req.session.emailid = results[0].emailid;
+                    req.session.userid = results[0].userid;
+            
+                    res.status(200).redirect("/main")
                 }
-
-                res.cookie('jwt', token, cookiesOptions);
-
-                req.session.loggedinUser= true;
-                req.session.emailid = email;
-                req.session.userid = results[0].userid;
-
-                res.status(200).redirect("/main")
             }
+            
+            else{
+                db.query('SELECT * FROM customer WHERE username=?',[email], async(error, results) =>{
+                    console.log(results)
+                    if( results.length ==0 || !(await bcrypt.compare(password,results[0].password))) {
+                        res.status(401).render('login',{
+                            message:'Email or Username or Password is incorrect'
+                        })
+                    } else{
+                        const id =results[0].userid;
+                
+                        const token = jwt.sign({id :id}, process.env.JWT_SECRET,{
+                            expiresIn: process.env.JWT_EXPIRES_IN
+                        });
+                
+                        const cookiesOptions = {
+                            expires: new Date(
+                                Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60
+                            ),
+                            httpOnly:true
+                        }
+                
+                        res.cookie('jwt', token, cookiesOptions);
+                
+                        req.session.loggedinUser= true;
+                        req.session.emailid = results[0].emailid;
+                        req.session.userid = results[0].userid;
+                
+                        res.status(200).redirect("/main")
+                    }
+                    
+                })
+            }
+            
         })
+        
 
     }catch(error){
         console.log(error);
     }
 }
+
+    
+
 
 exports.register = (req, res) => {
     
@@ -218,7 +259,6 @@ exports.inbox = (req,res) =>{
                 if (err) throw err;
             })
         }
-        console.log("hi")
         res.status(200).redirect("/inbox")
     }
     
