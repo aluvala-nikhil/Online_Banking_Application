@@ -10,10 +10,75 @@
     
     <!-- Custom Style-->
     <link rel="stylesheet" href="/profile-css/style.css">
+    <style>
+    header {
+    background-color: #1c1c1c;
+    padding: 10px;
+    display: inline-flex;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0 0 3px royalblue;
+    width: 100%;
+  }
+  
+  .logo {
+    color: #fff;
+    padding-left: 20px;
+    font-weight: bold;
+  }
+  header li {
+    display: inline;
+    padding-left: 40px;
+  }
+  
+  header li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 13px;
+    transition: 0.3s ease;
+    font-size: 17px;
+    
+  }
+  
+  header li a:hover,
+  .active {
+    color: royalblue;
+  }
+  
+  button {
+    padding: 9px 25px;
+    background-color: rgba(105, 133, 214, 0.748);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    font-size: 15px;
+    margin-top: 13px;
+    margin-right: 13px;
+  }
+  
+  button:hover {
+    background-color: #4169e1;
+  }
+    </style>
 </head>
 
 <body>
-  
+  <header>
+		<div class="logo" style="padding-left: 50px;">
+			<h2>Online Banking</h2>
+		</div>
+		<nav>
+			<ul class="nav_links1">
+				<li><a href="/main">Home</a></li>
+				<li><a href="#" class="active">Profile</a></li>
+				<li><a href="/account">Account</a></li>
+				<li><a href="/inbox">Notification</a></li>
+				<li><a href="#">About Us</a></li>
+			</ul>
+		</nav>
+		<a class="cta" href="/logout" style="padding-right: 50px;"><button>Logout</button></a>
+	</header>
 
   <div class="container bootstrap snippets bootdeys">
   <div class="row">

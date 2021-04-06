@@ -17,7 +17,13 @@ router.get('/login',(req,res) => {
 })
 
 router.get('/main',(req,res) => {
+    if(req.session.loggedinUser){
+
     res.render('main');
+    }
+    else{
+        res.render('login');
+    }
 })
 
 router.get('/profile', function(req, res) {
@@ -63,6 +69,22 @@ router.get('/inbox', function(req, res) {
     }
 });
 
-
+router.get('/logout',(req,res) => {
+    sess=req.session;
+       var data = {
+           "Data":""
+       };
+       sess.destroy(function(err) {
+           if(err){
+               data["Data"] = 'Error destroying session';
+               res.json(data);
+           }else{
+               data["Data"] = 'Session destroy successfully';
+               res.redirect("/login")
+               
+           }
+       });
+       
+})
 
 module.exports=router;
