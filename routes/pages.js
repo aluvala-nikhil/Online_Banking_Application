@@ -97,6 +97,16 @@ router.get('/logout',(req,res) => {
            }
        });
        
+});
+
+router.get('/transaction',(req,res) => {
+    if(req.session.loggedinUser){
+
+    res.render('transaction');
+    }
+    else{
+        res.render('login');
+    }
 })
 
 module.exports=router;
