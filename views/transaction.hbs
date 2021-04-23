@@ -26,7 +26,7 @@
   <div class="form-wrapper" style="padding:0px">
     <h2 style="background-color: #16a085;margin-bottom: 0px;margin-top: 0px;height: 10%;padding-top: 1%;padding-left: 20px;padding-bottom: 1% ; color:white; font-weight: bold;">Search Criteria</h2>
 
-    <form action="">
+    <form action="/transaction">
       
       <div>
         <div style="width: 14%; float:left ; padding-left: 20px;">
@@ -37,7 +37,6 @@
             <option value="l2">xxxxxxxxx</option>
             <option value="l1">xxxxxxxxx</option>
             <option value="l*">xxxxxxxxx</option>
-            <option value="bb">Jai Balayya</option>
           </select>
         </div>
       </div>
@@ -50,7 +49,7 @@
           <input type="date" name="other_reason" />
         </div>
         <div style="width:15.4%; float: left;">
-          Transaction Date From :  
+          Transaction Date To :  
         </div>
         <div style="width:40%; float: left;">
           <input type="date" name="other_reason" />
@@ -63,10 +62,10 @@
         </div>
         <div style="width:80%; float: left;">
           <select name="select" id="time" style="width: 13%;">
-            <option value="l2">Last 2 Months</option>
-            <option value="l1">Last 1 Months</option>
-            <option value="l*">Last * Months</option>
-            <option value="bb">Jai Balayya</option>
+            <option value="l2">Last 1 Months</option>
+            <option value="l1">Last 2 Months</option>
+            <option value="l*">Last 3 Months</option>
+            <option value="bb">Last 6 Months</option>
           </select>
         </div>
       </div>
@@ -86,20 +85,15 @@
         </div>
         <div style="width:80%; float: left;">
           <select name="category" id="category" style="width: 13%;">
-            <option value="l2">Last 2 Months</option>
-            <option value="l1">Last 1 Months</option>
-            <option value="l*">Last * Months</option>
-            <option value="bb">Jai Balayya</option>
+            <option value="l2">debit</option>
+            <option value="l1">credit</option>
           </select>
         </div>
       </div>
       
-      
-      
-     
-      
       <button type="submit">Submit</button>
     </form>
+    <input type="text" class="inboxData" value="{{data}}" style="display: none;">
   </div>
 
   <table>
@@ -164,3 +158,7 @@
   </table>
 </body>
 </html>
+<script>
+var data= JSON.parse(document.querySelector(".inboxData").value);
+console.log(data)
+</script>
