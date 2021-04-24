@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transactions Page</title>
+
+  <link rel="stylesheet" href="/transaction-css/style.css">
+</head>
+<body>
+  <header>
+		<div class="logo">
+			<h2>Online Banking</h2>
+		</div>
+    <ul>
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Home</a></li>
+    </ul>
+		<a class="logout" href="#"><button>Logout</button></a>
+  </header>
+
+  <div class="form-wrapper" style="padding:0px">
+    <h2 style="background-color: #16a085;margin-bottom: 0px;margin-top: 0px;height: 10%;padding-top: 1%;padding-left: 20px;padding-bottom: 1% ; color:white; font-weight: bold;">Search Criteria</h2>
+
+    <form name="trans_form" id="trans_form" method="POST" action="#" onsubmit="return trans_info()">
+      
+      <div>
+        <div style="width: 14%; float:left ; padding-left: 20px;">
+          <label for="Account_number" > Account Number : </label>
+        </div>
+        <div style="width: 84%; float:left;">
+          <select name="trans[]" id="Account_number" style="width: 20%;">
+          
+          </select>
+        </div>
+      </div>
+    
+      <div style="margin-top: 3%;">
+        <div style="width:15.4%; float: left;">
+          <input type="radio" name="trans_details" id="trans_date" value="trans_date" onclick="document.getElementById('trans_date_from').disabled = false; document.getElementById('trans_date_to').disabled = false; document.getElementById('trans_period_value').disabled = true; document.getElementById('trans_count_value').disabled = true;" />Transaction Date From :  
+        </div>
+        <div style="width:20%; float: left;">
+          <input type="date" name="trans_date_from" id="trans_date_from" disabled="disabled"/>
+        </div>
+        <div style="width:15.4%; float: left;">
+          Transaction Date To :  
+        </div>
+        <div style="width:40%; float: left;">
+          <input type="date" name="trans_date_to" id="trans_date_to" disabled="disabled"/>
+        </div>
+      </div>
+      
+      <div style="margin-top: 6%;width: 100%;">
+        <div style="width:15.4%; float: left;">
+          <input type="radio" name="trans_details" id="trans_period" value="" onclick="document.getElementById('trans_period_value').disabled = false; document.getElementById('trans_date_from').disabled = true; document.getElementById('trans_date_to').disabled = true; document.getElementById('trans_count_value').disabled = true;"  />Transaction Period :  
+        </div>
+        <div style="width:80%; float: left;">
+          <select name="trans_period_value" id="trans_period_value" style="width: 13%;" id="charstype" disabled="disabled">
+            <option value="1">Last 1 Months</option>
+            <option value="2">Last 2 Months</option>
+            <option value="3">Last 3 Months</option>
+            <option value="6">Last 6 Months</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-top: 9%;width: 100%;">
+        <div style="width:15.4%; float: left;">
+          <input type="radio" name="trans_details" id="trans_count" value="" onclick="document.getElementById('trans_period_value').disabled = true; document.getElementById('trans_date_from').disabled = true; document.getElementById('trans_date_to').disabled = true; document.getElementById('trans_count_value').disabled = false;"   />Last N Transactions :  
+        </div>
+        <div style="width:80%; float: left;">
+          <input name="trans_count_value" id="trans_count_value" style="width:20%" disabled="disabled"/>
+        </div>
+      </div>
+
+      <div style="margin-top: 12%;width: 100%;">
+        <div style="width: 14%; float:left ; padding-left: 20px;">
+          <label for="category">Category : </label>
+        </div>
+        <div style="width:80%; float: left;">
+          <select name="trans_category" id="trans_category" style="width: 13%;">
+            <option value="debit">debit</option>
+            <option value="credit">credit</option>
+          </select>
+        </div>
+      </div>
+      
+      <button  type="submit">Submit</button>
+    </form>
+    <input type="text" class="trans_history" value="{{data}}" style="display: none;">
+    <input type="text" class="trans_history1" value="{{data1}}" style="display: none;">
+  </div>
+
+  <table id="trans_table">
+    <tr id="header">
+        <th>Trans Id</th>
+        <th>Trans Type</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Payment Type</th>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Savings</td>
+      <td>2500</td>
+      <td>10-2-2020</td>
+      <td>Lorem ipsum dolor sit amet consectetur</td>
+      <td>Debited</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Savings</td>
+      <td>2500</td>
+      <td>10-2-2020</td>
+      <td>Lorem ipsum dolor sit amet consectetur</td>
+      <td>Debited</td>
+
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Savings</td>
+      <td>2500</td>
+      <td>10-2-2020</td>
+      <td>Lorem ipsum dolor sit amet consectetur</td>
+      <td>Debited</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Savings</td>
+      <td>2500</td>
+      <td>10-2-2020</td>
+      <td>Lorem ipsum dolor sit amet consectetur</td>
+      <td>Debited</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Savings</td>
+      <td>2500</td>
+      <td>10-2-2020</td>
+      <td>Lorem ipsum dolor sit amet consectetur</td>
+      <td>Debited</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Savings</td>
+      <td>2500</td>
+      <td>10-2-2020</td>
+      <td>Lorem ipsum dolor sit amet consectetur</td>
+      <td>Debited</td>
+    </tr>
+
+  </table>
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<script>
+function trans_history(data){
+  var block='<tr id="header"><th>Trans Id</th><th>Trans Type</th><th>Amount</th><th>Date</th><th>Description</th><th>Payment Type</th></tr>'
+	
+	if(data.length == 0){
+		block+='<tr><td>NULL</td><td>NULL</td><td>NULL</td><td>NULL</td><td>NULL</td><td>NULL</td></tr>'
+	}
+	for(i=0; i<data.length;i++){
+		 block+='<tr><td>'+data[i].transid+'</td><td>'+data[i].transtype+'</td><td>'+data[i].amount+'</td><td>'+String(data[i].date).slice(0,10)+'</td><td>'+data[i].description+'</td><td>'+data[i].payment_type+'</td></tr>'
+	}
+	document.getElementById("trans_table").innerHTML=block;
+}
+
+</script>
+
+<script>
+	var data= JSON.parse(document.querySelector(".trans_history").value);
+  var data1= JSON.parse(document.querySelector(".trans_history1").value);
+	var block="";
+	
+	if(data.length == 0){
+		block='<option value="NULL">No Account</option>'
+	}
+	for(i=0; i<data.length;i++){
+		 block+='<option value="'+data[i].accountno+'">'+data[i].accountno+'</option>'
+	}
+	document.getElementById("Account_number").innerHTML=block;
+  trans_history(data1)
+	
+</script>
+
+<script>
+
+function trans_info(){
+	
+  event.preventDefault();
+  
+  if (document.getElementById("trans_date_from").disabled == false && document.getElementById("trans_date_to").disabled == false){  
+    $.ajax({
+      type: 'POST',
+      url: "/auth/transaction",
+      data: { Account_number :document.getElementById("Account_number").value, trans_date_from:document.getElementById("trans_date_from").value , trans_date_to:document.getElementById("trans_date_to").value, trans_category:document.getElementById("trans_category").value },
+      dataType: 'json',
+      success: function (result) {
+        trans_history(result)
+      },
+      error: function (request, status, error) {
+          console.log("failure")
+      }
+    });
+  }
+  else if(document.getElementById("trans_period_value").disabled == false){
+     $.ajax({
+      type: 'POST',
+      url: "/auth/transaction",
+      data: { Account_number :document.getElementById("Account_number").value, trans_period_value:document.getElementById("trans_period_value").value,  trans_category:document.getElementById("trans_category").value},
+      dataType: 'json',
+      success: function (result) {
+        trans_history(result)
+      },
+      error: function (request, status, error) {
+          console.log("failure")
+      }
+    });
+  }
+  else if(document.getElementById("trans_count_value").disabled == false){
+    $.ajax({
+      type: 'POST',
+      url: "/auth/transaction",
+      data: { Account_number :document.getElementById("Account_number").value, trans_count_value:document.getElementById("trans_count_value").value,  trans_category:document.getElementById("trans_category").value},
+      dataType: 'json',
+      success: function (result) {
+        trans_history(result)
+      },
+      error: function (request, status, error) {
+          console.log("failure")
+      }
+    });
+  } 
+}
+</script>

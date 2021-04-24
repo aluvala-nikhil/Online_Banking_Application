@@ -60,8 +60,9 @@ button {
   cursor: pointer;
   transition: all 0.3s ease 0s;
   font-size: 15px;
-  margin-top: 13px;
+  margin-top: 0px;
   margin-right: 13px;
+  color:whitesmoke
 }
 
 button:hover {
@@ -343,20 +344,20 @@ button:hover {
 </head>
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<header>
+<header style="position: absolute;">
 		<div class="logo">
-			<h2 style="font-size:20px">Online Banking</h2>
+			<h2 style="font-size:20px; margin-top:15px">Online Banking</h2>
 		</div>
-        <ul>
+        <ul style="margin-top:10px">
             <li><a href="/main" >Home</a></li>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="#" class="active">Account</a></li>
-            <li><a href="#">Notification</a></li>
-            <li><a href="#">Home</a></li>
+            <li><a href="/profile" >Profile</a></li>
+            <li><a href="/account" >Account</a></li>
+            <li><a href="#" class="active">Notification</a></li>
+            <li><a href="#">About Us</a></li>
         </ul>
-        <a class="logout" href="#"><button>Logout</button></a>
+        <a class="logout" href="/logout"><button>Logout</button></a>
     </header>
-<div class="container">
+<div class="container" style="padding-top: 120px;">
 <div class="row">
 	<!-- BEGIN INBOX -->
 	<div class="col-md-12">
@@ -373,7 +374,7 @@ button:hover {
 						<div>
 							<ul class="nav nav-pills nav-stacked">
 								<li class="header">Folders</li>
-								<li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox (14)</a></li>
+								<li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox</a></li>
 								<li><a href="#"><i class="fa fa-pencil-square-o"></i> Queries</a></li>
 							</ul>
 						</div>
@@ -414,90 +415,11 @@ button:hover {
 								<tbody id="messages">
 									
 									
-								<tr>
-									<td class="action"><input type="checkbox" /></td>
-									<td class="action"><i class="fa fa-star-o"></i></td>
-									<td class="action"><i class="fa fa-bookmark"></i></td>
-									<td class="name"><a href="#" onclick="togglePopup()">Larry Gardner</a></td>
-									<td class="subject"><a href="#" onclick="togglePopup()">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-									<td class="time">08:30 PM</td>
-								</tr>
-								<tr class="read">
-									<td class="action"><div class="icheckbox_square-blue" st<td class="action"><input type="checkbox" /></td>
-									<td class="action"><i class="fa fa-star"></i></td>
-									<td class="action"><i class="fa fa-bookmark"></i></td>
-									<td class="name"><a href="#" onclick="togglePopup()">Larry Gardner</a></td>
-									<td class="subject"><a href="#" onclick="togglePopup()">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-									<td class="time">08:30 PM</td>
-								</tr>
-								<tr>
-									<td class="action"><input type="checkbox" /></td>
-									<td class="action"><i class="fa fa-star-o"></i></td>
-									<td class="action"><i class="fa fa-bookmark-o"></i></td>
-									<td class="name"><a href="#" onclick="togglePopup()">Larry Gardner</a></td>
-									<td class="subject"><a href="#" onclick="togglePopup()">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-									<td class="time">08:30 PM</td>
-								</tr>
-								<tr class="read">
-									<td class="action"><input type="checkbox" /></td>
-									<td class="action"><i class="fa fa-star-o"></i></td>
-									<td class="action"><i class="fa fa-bookmark-o"></i></td>
-									<td class="name"><a href="#" onclick="togglePopup()">Larry Gardner</a></td>
-									<td class="subject"><a href="#" onclick="togglePopup()">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-									<td class="time">08:30 PM</td>
-								</tr>
-								<tr>
-									<td class="action"><input type="checkbox" /></td>
-									<td class="action"><i class="fa fa-star-o"></i></td>
-									<td class="action"><i class="fa fa-bookmark-o"></i></td>
-									<td class="name"><a href="#" onclick="togglePopup()">Larry Gardner</a></td>
-									<td class="subject"><a href="#" onclick="togglePopup()">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-									<td class="time">08:30 PM</td>
-								</tr>
-								<tr>
-									<td class="action"><input type="checkbox" /></td>
-									<td class="action"><i class="fa fa-star-o"></i></td>
-									<td class="action"><i class="fa fa-bookmark"></i></td>
-									<td class="name"><a href="#" onclick="togglePopup()">Larry Gardner</a></td>
-									<td class="subject"><a href="#" onclick="togglePopup()">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-									<td class="time">08:30 PM</td>
-								</tr>
-								<tr class="read">
-									<td class="action"><div class="icheckbox_square-blue" st<td class="action"><input type="checkbox" /></td>
-									<td class="action"><i class="fa fa-star"></i></td>
-									<td class="action"><i class="fa fa-bookmark"></i></td>
-									<td class="name"><a href="#" onclick="togglePopup()">Larry Gardner</a></td>
-									<td class="subject"><a href="#" onclick="togglePopup()">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-									<td class="time">08:30 PM</td>
-								</tr>
-								<tr>
-									<td class="action"><input type="checkbox" /></td>
-									<td class="action"><i class="fa fa-star-o"></i></td>
-									<td class="action"><i class="fa fa-bookmark-o"></i></td>
-									<td class="name"><a href="#" onclick="togglePopup()">Larry Gardner</a></td>
-									<td class="subject"><a href="#" onclick="togglePopup()">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-									<td class="time">08:30 PM</td>
-								</tr>
-								<tr class="read">
-									<td class="action"><input type="checkbox" /></td>
-									<td class="action"><i class="fa fa-star-o"></i></td>
-									<td class="action"><i class="fa fa-bookmark-o"></i></td>
-									<td class="name"><a href="#" onclick="togglePopup()">Larry Gardner</a></td>
-									<td class="subject"><a href="#" onclick="togglePopup()">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-									<td class="time">08:30 PM</td>
-								</tr>
+								
 							</tbody></table>
 						</div>
 
-						<ul class="pagination">
-							<li class="disabled"><a href="#">«</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">»</a></li>
-						</ul>						
+												
 					</div>
 					<!-- END INBOX CONTENT -->
 					
@@ -620,8 +542,10 @@ function del(list){
 	var flag=0;
 	list=[];
 	icon=""
+	if(data.length == 0){
+		block="<tr>No messages</tr>"
+	}
 	for(i=0; i<data.length;i++){
-		 flag=1;
 		 unread=data[i].unread
 		 if(unread=="Y"){
 			 value=""
@@ -637,9 +561,9 @@ function del(list){
 		 block+='<tr class='+value+'><td class="action"><input type="checkbox" id='+data[i].message_id+' name="sel"/></td><td class="action"><i class="fa fa-star-o"></i></td><td class="action"><i class="'+icon+'" onclick="readtoggle('+i+','+data[i].message_id+',this);"></i></td><td class="time">'+data[i].date+'</td><td class="subject"><a href="#" onclick="togglePopup('+i+','+data[i].message_id+',this)" maxlength="40">'+data[i].message+'</a></td><td class="time">'+data[i].time+'</td></tr>'
 		 console.log(block)
 	}
-	if (flag==1){
-            document.getElementById("messages").innerHTML=block;
-    }
+	
+    document.getElementById("messages").innerHTML=block;
+   
 	
 
 </script>

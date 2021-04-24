@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Displays site properly based on user's device -->
     <link rel="icon" type="image/png" sizes="32x32" href="/account-img/images/favicon-32x32.png">
     <title>Account Management</title>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/account-css/style.css">
+    <style>
+        .answer{
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <header style="position: absolute;">
@@ -17,10 +22,10 @@
             <li><a href="/main" >Home</a></li>
             <li><a href="/profile">Profile</a></li>
             <li><a href="#" class="active">Account</a></li>
-            <li><a href="#">Notification</a></li>
-            <li><a href="#">Home</a></li>
+            <li><a href="/inbox">Notification</a></li>
+            <li><a href="#">About Us</a></li>
         </ul>
-        <a class="logout" href="#"><button>Logout</button></a>
+        <a class="logout" href="/logout"><button>Logout</button></a>
     </header>
     <main class="wrapper">
         <div class="image__wrapper">
@@ -123,6 +128,11 @@
         </div>
     </main>
     <script>
+        function viewAccount(accountno){
+           
+        }
+    </script>
+    <script>
         var data= JSON.parse(document.querySelector(".accountData").value);
         var contentSavings='<div class="question"><h3 class="title__question"> Savings</h3><img src="/account-img/images/icon-arrow-down.svg" ></div>';
         var contentCurrent='<div class="question"><h3 class="title__question"> Current</h3><img src="/account-img/images/icon-arrow-down.svg" ></div>';
@@ -136,20 +146,19 @@
         for(i=0; i<data.length;i++){
             if(data[i].category=="savings"){
                 flag1=1;
-                console.log(flag1)
-                contentSavings=contentSavings+'<div class="answer" style="width: 100%;float:left">Account Number:'+data[i].accountno+'</div><div class="answer"><div style="width:50%;float:left; margin-bottom:25px" >Balance: Rs. '+data[i].balance+'</div><div style="width:21%;float:right"><a class="logout" href="#"><button style=" border-radius: inherit;color: whitesmoke;font-weight: bold; padding: 5px 15px;top:-35px;position:relative">Delete</button></a></div></div>';
+                contentSavings=contentSavings+'<div class="answer" onclick=viewAccount('+data[i].accountno+') style="width: 100%;float:left">Account Number:'+data[i].accountno+'</div><div class="answer"><div style="width:50%;float:left; margin-bottom:25px" >Balance: Rs. '+data[i].balance+'</div><div style="width:21%;float:right"><a class="logout" href="#"><button style=" border-radius: inherit;color: whitesmoke;font-weight: bold; padding: 5px 15px;top:-35px;position:relative">Delete</button></a></div></div>';
             }
             if(data[i].category=="current"){
                 flag2=1;
-                contentCurrent=contentCurrent+'<div class="answer" style="width: 100%;float:left">Account Number:'+data[i].accountno+'</div><div class="answer"><div style="width:50%;float:left; margin-bottom:25px" >Balance: Rs. '+data[i].balance+'</div><div style="width:21%;float:right"><a class="logout" href="#"><button style=" border-radius: inherit;color: whitesmoke;font-weight: bold; padding: 5px 15px;top:-35px;position:relative">Delete</button></a></div></div>';
+                contentCurrent=contentCurrent+'<div class="answer"onclick=viewAccount('+data[i].accountno+') style="width: 100%;float:left">Account Number:'+data[i].accountno+'</div><div class="answer"><div style="width:50%;float:left; margin-bottom:25px" >Balance: Rs. '+data[i].balance+'</div><div style="width:21%;float:right"><a class="logout" href="#"><button style=" border-radius: inherit;color: whitesmoke;font-weight: bold; padding: 5px 15px;top:-35px;position:relative">Delete</button></a></div></div>';
             }
             if(data[i].category=="homeloan"){
                 flag3=1;
-                contentLoan=contentLoan+'<div class="answer" style="width: 100%;float:left">Account Number:'+data[i].accountno+'</div><div class="answer"><div style="width:50%;float:left; margin-bottom:25px" >Balance: Rs. '+data[i].balance+'</div><div style="width:21%;float:right"><a class="logout" href="#"><button style=" border-radius: inherit;color: whitesmoke;font-weight: bold; padding: 5px 15px;top:-35px;position:relative">Delete</button></a></div></div>';
+                contentLoan=contentLoan+'<div class="answer" onclick=viewAccount('+data[i].accountno+') style="width: 100%;float:left">Account Number:'+data[i].accountno+'</div><div class="answer"><div style="width:50%;float:left; margin-bottom:25px" >Balance: Rs. '+data[i].balance+'</div><div style="width:21%;float:right"><a class="logout" href="#"><button style=" border-radius: inherit;color: whitesmoke;font-weight: bold; padding: 5px 15px;top:-35px;position:relative">Delete</button></a></div></div>';
             }
             if(data[i].category=="creditcard"){
                 flag4=1;
-                contentCredit=contentCredit+'<div class="answer" style="width: 100%;float:left">Account Number:'+data[i].accountno+'</div><div class="answer"><div style="width:50%;float:left; margin-bottom:25px" >Balance: Rs. '+data[i].balance+'</div><div style="width:21%;float:right"><a class="logout" href="#"><button style=" border-radius: inherit;color: whitesmoke;font-weight: bold; padding: 5px 15px;top:-35px;position:relative">Delete</button></a></div></div>';
+                contentCredit=contentCredit+'<div class="answer" onclick=viewAccount('+data[i].accountno+') style="width: 100%;float:left">Account Number:'+data[i].accountno+'</div><div class="answer"><div style="width:50%;float:left; margin-bottom:25px" >Balance: Rs. '+data[i].balance+'</div><div style="width:21%;float:right"><a class="logout" href="#"><button style=" border-radius: inherit;color: whitesmoke;font-weight: bold; padding: 5px 15px;top:-35px;position:relative">Delete</button></a></div></div>';
             }
         }
         
@@ -165,6 +174,7 @@
         if (flag4==1){
             document.getElementById("Credit").innerHTML=contentCredit;
         }
+        
         
     </script>
     

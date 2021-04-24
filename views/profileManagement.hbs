@@ -10,14 +10,78 @@
     
     <!-- Custom Style-->
     <link rel="stylesheet" href="/profile-css/style.css">
+    <style>
+          header {
+          background-color: #1c1c1c;
+          padding: 10px;
+          display: inline-flex;
+          justify-content: space-between;
+          text-align: center;
+          box-shadow: 0 0 3px royalblue;
+          width: 100%;
+        }
+
+        .logo {
+          color: #fff;
+          padding-left: 20px;
+          font-weight: bold;
+        }
+        header li {
+          display: inline;
+          padding-left: 40px;
+        }
+
+        header li a {
+          color: #fff;
+          text-decoration: none;
+          padding: 13px;
+          transition: 0.3s ease;
+          font-size: 17px;
+          
+        }
+
+        header li a:hover,
+        .active {
+          color: royalblue;
+        }
+
+        button {
+          padding: 9px 25px;
+          background-color: rgba(105, 133, 214, 0.748);
+          border: none;
+          border-radius: 50px;
+          cursor: pointer;
+          transition: all 0.3s ease 0s;
+          font-size: 15px;
+          margin-top: 0px;
+          margin-right: 13px;
+          color: white;
+        }
+
+        button:hover {
+          background-color: #4169e1;
+        }
+    </style>
 </head>
 
 <body>
-  
+  <header style="position: absolute;">
+		<div class="logo">
+			<h2 style="font-size:20px; margin-top:15px">Online Banking</h2>
+		</div>
+        <ul style="margin-top:10px">
+            <li><a href="/main" >Home</a></li>
+            <li><a href="#" class="active">Profile</a></li>
+            <li><a href="/account" >Account</a></li>
+            <li><a href="/inbox">Notification</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+        <a class="logout" href="/logout"><button>Logout</button></a>
+    </header>
 
-  <div class="container bootstrap snippets bootdeys">
-  <div class="row">
-    <div class="col-xs-12 col-sm-9">
+  <div class="container bootstrap snippets bootdeys" style="padding-top:120px">
+  <div class="row" style="display: flex;align-items: center;justify-content: center;">
+    <div class="col-xs-12 col-sm-10">
       <form action="/auth/profile" method="POST" class="form-horizontal">
         <div class="panel panel-default">
           <div class="panel-heading">

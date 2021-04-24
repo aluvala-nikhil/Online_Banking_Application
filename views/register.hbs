@@ -148,7 +148,7 @@
                             <div class="title">Password</div>
                             <div class="field">
                               <div class="label">Password</div>
-                              <input class="fourthInput1" type="text" name="password">
+                              <input class="fourthInput1" type="password" name="password">
                             </div>
                             <div class="field">
                               <div class="label">Confirm Password</div>
@@ -261,14 +261,14 @@
             button3.disabled = true; //button remains disabled
           } else {
 
-            if(/^[a-zA-Z0-9]+$/i.test(document.querySelector(".thirdInput1").value)){
+            if(/^[a-zA-Z]{3,8}[0-9]{0,8}$/i.test(document.querySelector(".thirdInput1").value)){
                 document.getElementById("username").innerHTML="";
                 button3.disabled = false; //button is enabled
 
             }
             else{
               button3.disabled = true;
-              document.getElementById("username").innerHTML="Username must be Alphanumeric";
+              document.getElementById("username").innerHTML="Username must have atleast 3 characters and all characters should be alphanumeric";
             }
           }
         }
