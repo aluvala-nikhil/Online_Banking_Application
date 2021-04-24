@@ -265,3 +265,35 @@ exports.inbox = (req,res) =>{
     
     
 }
+
+exports.transaction = (req,res) =>{
+    if(req.session.loggedinUser){
+        if(typeof req.body.trans_date_from != 'undefined' && req.body.trans_date_to != 'undefined' && req.body.trans_date_from !== null && req.body.trans_date_to !== null){
+            db.query('SELECT * FROM transactions WHERE accountno=? and date >=? and date<? and payment_type=?',[[req.body.Account_number],[req.body.trans_date_from],[req.body.trans_date_to],[req.body.trans_category]], function (err, data) {
+                res.send(JSON.stringify(data.reverse()))
+            });
+        }
+        else if(typeof req.body.trans_period_value != 'undefined' && req.body.trans_period_value !== null){
+            db.query('select * from transactions where accountno=? and date >= date_sub(now(),interval ? month) and payment_type=?',[[req.body.Account_number],[req.body.trans_period_value],[req.body.trans_category]], function (err, data) {
+                res.send(JSON.stringify(data.reverse()))
+            });
+        }
+        else if(typeof req.body.trans_count_value != 'undefined' && req.body.trans_count_value !== null){
+            db.query('select * from transactions where accountno=? and payment_type=?',[[req.body.Account_number],[req.body.trans_category]], function (err, data) {
+                data=data.reverse();
+                if(data.length<req.body.trans_count_value){
+                    req.body.trans_count_value=data.length
+                    console.log(req.body.trans_count_value)
+                }
+
+                data.splice(req.body.trans_count_value, data.length-req.body.trans_count_value);
+                console.log(data)
+                res.send(JSON.stringify(data))
+            });
+        }
+
+    }
+    else{
+        res.render('login');
+    }
+}
