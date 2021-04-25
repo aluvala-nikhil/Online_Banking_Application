@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./css/style.css"/>
+    <title>My Payees</title>
+  </head>
+  <body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <h2>Online Banking</h2>
+        </div>
+        <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Home</a></li>
+        </ul>
+        <a class="logout" href="#"><button>Logout</button></a>
+    </header>
+    <!-- Header -->
+
+    <button class="btn" onclick="toggleLogin()">Add Payee+</button>
+    <div class="overlay">
+      <div class="login">
+        <div class="header">
+          <h1>Add here</h1>
+          <i class="fas fa-times" onclick="toggleLogin()"></i>
+        </div>
+        <div class="body">
+          <form action="#" class="form">
+            <input type="text" placeholder="Name"/>
+            <input type="text" placeholder="Bank Name"/>
+            <input type="text" placeholder="Branch Name"/>
+            <input type="Number" placeholder="Account Number"/>
+            <input type="text" placeholder="IFSC Code"/>
+          </form>
+        </div>
+        <div class="footer">
+          <button>Add Now</button>
+        </div>
+      </div>
+    </div>
+    <!-- My payee Heading -->
+    <h1 class="mypayee">My Payees</h1>
+    <!-- My payee Heading -->
+
+    <!-- My payees -->
+    <div class="grid-container" style="padding-left: 25px;">
+        <div class="courses-container">
+            <div class="course">
+                <div class="course-preview" id="my_header">
+                    <h6>Name</h6>
+                    <h2>A. Nikhil</h2>
+                    <div class="btn1">
+                        <a href="#"><button>Delete</button></a>
+                    </div>
+                </div>
+                <div class="course-info">
+                    <h6>Bank Name</h6>
+                    <h3>SBI</h3>
+                    <h6>Branch Name</h6>
+                    <h3>Badvel</h3>
+                    <h6>Account Number</h6>
+                    <h3>xxxxxxxxxxxxxxxx</h3>
+                    <h6>IFSC Code</h6>
+                    <h3>SBIN00000000</h3>
+                    <button class="btnt">Transfer</button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="courses-container">
+            <div class="course">
+                <div class="course-preview">
+                    <h6>Name</h6>
+                    <h2>B. Sai Ram Charan</h2>
+                    <div class="btn1">
+                        <a href="#"><button>Delete</button></a>
+                    </div>
+                </div>
+                <div class="course-info">       
+                    <h6>Bank Name</h6>
+                    <h3>SBI</h3>
+                    <h6>Branch Name</h6>
+                    <h3>Badvel</h3>
+                    <h6>Account Number</h6>
+                    <h3>xxxxxxxxxxxxxxxx</h3>
+                    <h6>IFSC Code</h6>
+                    <h3>SBIN00000000</h3>
+                    <button class="btnt">Transfer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-container" style="padding-left: 25px;">
+        <div class="courses-container">
+            <div class="course">
+                <div class="course-preview" id="my_header">
+                    <h6>Name</h6>
+                    <h2>B. Krishna Lokesh</h2>
+                    <div class="btn1">
+                        <a href="#"><button>Delete</button></a>
+                    </div>
+                </div>
+                <div class="course-info">
+                    <h6>Bank Name</h6>
+                    <h3>SBI</h3>
+                    <h6>Branch Name</h6>
+                    <h3>Badvel</h3>
+                    <h6>Account Number</h6>
+                    <h3>xxxxxxxxxxxxxxxx</h3>
+                    <h6>IFSC Code</h6>
+                    <h3>SBIN00000000</h3>
+                    <button class="btnt">Transfer</button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="courses-container">
+            <div class="course">
+                <div class="course-preview">
+                    <h6>Name</h6>
+                    <h2>G. Sai Venkatesh</h2>
+                    <div class="btn1">
+                        <a href="#"><button>Delete</button></a>
+                    </div>
+                </div>
+                <div class="course-info">
+                    <h6>Bank Name</h6>
+                    <h3>SBI</h3>
+                    <h6>Branch Name</h6>
+                    <h3>Badvel</h3>
+                    <h6>Account Number</h6>
+                    <h3>xxxxxxxxxxxxxxxx</h3>
+                    <h6>IFSC Code</h6>
+                    <h3>SBIN00000000</h3>
+                    <button class="btnt">Transfer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-container" style="padding-left: 25px;">
+        <div class="courses-container">
+            <div class="course">
+                <div class="course-preview" id="my_header">
+                    <h6>Name</h6>
+                    <h2>K. Venkat Ajay</h2>
+                    <div class="btn1">
+                        <a href="#"><button>Delete</button></a>
+                    </div>
+                </div>
+                <div class="course-info">
+                    <h6>Bank Name</h6>
+                    <h3>SBI</h3>
+                    <h6>Branch Name</h6>
+                    <h3>Badvel</h3>
+                    <h6>Account Number</h6>
+                    <h3>xxxxxxxxxxxxxxxx</h3>
+                    <h6>IFSC Code</h6>
+                    <h3>SBIN00000000</h3>
+                    <button class="btnt">Transfer</button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="courses-container">
+            <div class="course">
+                <div class="course-preview">
+                    <h6>Name</h6>
+                    <h2>K. Venkata Vinay Babu</h2>
+                    <div class="btn1">
+                        <a href="#"><button>Delete</button></a>
+                    </div>
+                </div>
+                <div class="course-info">
+                    <h6>Bank Name</h6>
+                    <h3>SBI</h3>
+                    <h6>Branch Name</h6>
+                    <h3>Badvel</h3>
+                    <h6>Account Number</h6>
+                    <h3>xxxxxxxxxxxxxxxx</h3>
+                    <h6>IFSC Code</h6>
+                    <h3>SBIN00000000</h3>
+                    <button class="btnt">Transfer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- My payees -->
+  </body>
+  <script>
+    function toggleLogin() {
+      document.querySelector(".overlay").classList.toggle("open");
+    }
+  </script>
+</html>
