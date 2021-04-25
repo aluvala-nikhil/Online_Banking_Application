@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+:root {
+  --softRed: hsl(14, 88%, 65%);
+  --veryDarkGrayBlue: hsl(237, 12%, 33%);
+  --darkGrayBlue: hsl(240, 6%, 50%);
+  --lightGrayBlue: hsl(240, 5%, 91%);
+  --fontSize: 12px;
+}
+
+body {
+    background-color: #C0C0C0;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+header {
+    background-color: #1c1c1c;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0 0 3px royalblue;
+}
+
+.logo {
+    color: #fff;
+    padding-left: 20px;
+}
+header li {
+    display: inline;
+    padding-left: 40px;
+}
+
+header li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 13px;
+    transition: 0.3s ease;
+}
+
+header li a:hover,
+.active {
+    color: royalblue;
+}
+
+button {
+    padding: 9px 25px;
+    background-color: royalblue;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    font-size: 15px;
+    margin-top: 13px;
+    margin-right: 13px;
+}
+
+button:hover {
+    background-color: rgba(105, 133, 214, 0.748);
+}
+
+.form-wrapper {
+    position: relative;
+    display: block;
+    width: 95%;
+    height: 300px;
+    margin-top: 40px;
+    margin-left: 35px;
+    padding: 20px;
+    border-radius: 5px;  
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 45px rgba(0, 0, 0, 0.5);
+}
+
+.form-wrapper form {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 10px 0;
+    padding-left: 20px;
+    border-top: 1px solid #e6e6e6;
+}
+
+.form-wrapper1 {
+    position: relative;
+    display: block;
+    width: 92.4%;
+    height: 150px;
+    margin-top: 50px;
+    margin-left: 35px;
+    padding: 20px;
+    border-radius: 5px;  
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 45px rgba(0, 0, 0, 0.5);
+}
+
+table {
+    position: relative;
+    border-collapse: collapse;
+    width: 95%;
+    height: 200px;
+    border: 1px solid #bdc3c7;
+    padding-bottom: 20px;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    margin-top: 30px;
+    margin-left: 35px;
+}
+
+tr {
+    transition: all .2s ease-in;
+    cursor: pointer;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#header {
+    background-color: #16a085;
+    color: #fff;
+}
+
+textarea {
+    resize: none;
+}
+
+.btn button {
+    position: relative;
+    display: block;
+    float: right;
+    margin: 40px 13px 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 100;
+    letter-spacing: 1px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    z-index: 0;
+}
+
+.btn button:before {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: #9b59b6;
+    border-radius: 5px;
+    transition: height, 250ms ease;
+    z-index: -1;
+}
+
+.btn button:hover {
+    box-shadow: 0 0 10px rgba(34, 34, 34, 0.3);
+}
+
+.btn button:hover:before {
+    height: 100%;
+}
