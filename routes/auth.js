@@ -13,4 +13,9 @@ router.post('/inbox',authController.inbox);
 
 router.post('/transaction',authController.transaction);
 
+router.post('/submitQuery',authController.submitQuery);
+
+router.post('/Queries',authController.Queries);
+
+
 module.exports=router; 

@@ -70,7 +70,11 @@ router.get('/inbox', function(req, res) {
         
         db.query('SELECT * FROM messages WHERE userid=?',[req.session.userid], function (err, data) {
             if (err) throw err;
-            res.render('inbox', {data: JSON.stringify(data)});
+            db.query('SELECT * FROM accounts WHERE userid=?',[req.session.userid], function (err1, data1) {
+                if (err) throw err;
+                res.render('inbox', {data: JSON.stringify(data), data1: JSON.stringify(data1)});
+            });
+           
         });
 
     }else{
