@@ -100,6 +100,24 @@ router.get('/logout',(req,res) => {
        
 });
 
+router.get('/transaction/:accountno',(req,res) => {
+    const accountno = req.params.accountno;
+    if(req.session.loggedinUser){
+        db.query('SELECT * FROM accounts WHERE userid=?',[req.session.userid], function (err, data) {
+            if (err) throw err;
+            db.query('SELECT * FROM transactions WHERE accountno=?',[accountno], function (err1, data1) {
+                if (err1) throw err1;
+                res.render('transaction', {data: JSON.stringify(data), data1: JSON.stringify(data1) });
+            })
+            
+        });
+    }
+    else{
+        res.render('login');
+    }
+
+})
+
 router.get('/transaction',(req,res) => {
     if(req.session.loggedinUser){
         db.query('SELECT * FROM accounts WHERE userid=?',[req.session.userid], function (err, data) {
@@ -116,6 +134,7 @@ router.get('/transaction',(req,res) => {
     }
 
 })
+
 
 
 module.exports=router;

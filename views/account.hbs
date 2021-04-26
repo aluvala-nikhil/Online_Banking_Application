@@ -129,7 +129,8 @@
     </main>
     <script>
         function viewAccount(accountno){
-           
+           var newurl = window.location.protocol + "//" + window.location.host + "/transaction/" +  accountno;
+           window.location.href = newurl
         }
     </script>
     <script>
