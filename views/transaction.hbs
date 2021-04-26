@@ -187,6 +187,16 @@ function trans_history(data){
 		 block+='<option value="'+data[i].accountno+'">'+data[i].accountno+'</option>'
 	}
 	document.getElementById("Account_number").innerHTML=block;
+
+  url=window.location
+  var pathname = new URL(url).pathname;
+  console.log(pathname)
+  pathname = pathname.replace("/transaction/", "");
+  console.log(pathname)
+  if(pathname!=""){
+    document.getElementById("Account_number").value=pathname
+  }
+
   trans_history(data1)
 	
 </script>

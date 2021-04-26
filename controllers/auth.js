@@ -257,6 +257,7 @@ exports.inbox = (req,res) =>{
     else{
         
         for(i=0;i<req.body['array[]'].length;i++){
+            console.log(req.body['array[]'][i]);
             db.query("DELETE from messages where message_id=?",[req.body['array[]'][i]], function(err,data){
                 if (err) throw err;
             })
@@ -330,5 +331,29 @@ exports.fundtransfer = (req,res) =>{
         db.query('UPDATE accounts SET balance = ? where accountno = ?',[[balance-amount],accno], function (err, data) {
 
         });
+    }
+}
+
+exports.submitQuery = (req,res) =>{
+    if(req.session.loggedinUser){
+        db.query('INSERT INTO queries(Query, accountno, subject) VALUES (?,?,?) ', [[req.body.message],[req.body.account_number],[req.body.subject]], function (err, data) {
+            if (err) throw err;
+            res.send(JSON.stringify("Query Sumbitted Successfully"))
+        });
+    }
+    else{
+        res.render('login');
+    }
+}
+
+exports.Queries = (req,res) =>{
+    if(req.session.loggedinUser){
+        db.query("SELECT * from queries where accountno= ?",[req.body.account_number], function(err,data){
+            if (err) throw err;
+            res.send(JSON.stringify(data))
+        });
+    }
+    else{
+        res.render('login');
     }
 }

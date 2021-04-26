@@ -17,4 +17,9 @@ router.post('/payee',authController.payee);
 
 router.post('/fundtransfer',authController.fundtransfer);
 
+router.post('/submitQuery',authController.submitQuery);
+
+router.post('/Queries',authController.Queries);
+
+
 module.exports=router; 

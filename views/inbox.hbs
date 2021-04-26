@@ -374,8 +374,8 @@ button:hover {
 						<div>
 							<ul class="nav nav-pills nav-stacked">
 								<li class="header">Folders</li>
-								<li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox</a></li>
-								<li><a href="#"><i class="fa fa-pencil-square-o"></i> Queries</a></li>
+								<li class="active" id="Inbox" onclick="location.reload()"><a href="#"><i class="fa fa-inbox"></i> Inbox</a></li>
+								<li onclick="queries()" id="Queries"><a href="#"><i class="fa fa-pencil-square-o"></i> Queries</a></li>
 							</ul>
 						</div>
 					</div>
@@ -388,13 +388,18 @@ button:hover {
 								<label style="margin-right: 8px;" class="">
 									<div class="icheckbox_square-blue" style="position: relative;"><input type="checkbox" id="check-all" class="icheck" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
 								</label>
-								<div class="btn-group">
+								<div class="btn-group" id="action">
 									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin-bottom: 10px;">
 										Action <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu" role="menu">
 										<li><a href="#" onclick="delmsg()">Delete</a></li>
 									</ul>
+								</div>
+								<div class="form-group" id="account_queries" style="display: none;">
+									<label for="acc">Account Number:</label>
+									<select name="acc" id="acc_number" style="width: 20%;padding: 3px;margin-left: 3px;" onchange="query_onchange()">
+									</select>
 								</div>
 							</div>
 
@@ -406,6 +411,7 @@ button:hover {
 							<div class="overlay"></div>
 							<div class="content">
 							  <div class="close-btn" onclick="togglePopup(0)">&times;</div>
+							  <h4 id="heading"></h4>
 							  <p id="message1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo aspernatur laborum rem sed laudantium excepturi veritatis voluptatum architecto, dolore quaerat totam officiis nisi animi accusantium alias inventore nulla atque debitis.</p>
 							</div>
 						</div>
@@ -425,32 +431,27 @@ button:hover {
 					
 					<!-- BEGIN COMPOSE MESSAGE -->
 					<div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
-						<div class="modal-wrapper">
+						<div class="modal-wrapper" style="margin-top: 10%;">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header bg-blue">
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 										<h4 class="modal-title"><i class="fa fa-envelope"></i> Compose New Query</h4>
 									</div>
-									<form action="#" method="post">
+									<form action="#" method="post"  id="submit_query" onsubmit="return submitQuery()">
 										<div class="modal-body">
 											<div class="form-group">
-												<input name="to" type="email" class="form-control" placeholder="To">
+												<label for="accounts">Account Number:</label>
+												<select name="accounts" id="account_number" style="width: 15%;padding: 3px;margin-left: 3px;">
+												</select>
 											</div>
 											<div class="form-group">
-												<input name="cc" type="email" class="form-control" placeholder="Cc">
+												<input name="subject" id="subject" type="text" class="form-control" placeholder="Subject" required>
 											</div>
 											<div class="form-group">
-												<input name="bcc" type="email" class="form-control" placeholder="Bcc">
+												<textarea name="message" id="message" class="form-control" placeholder="Message" style="height: 120px;" required></textarea>
 											</div>
-											<div class="form-group">
-												<input name="subject" type="email" class="form-control" placeholder="Subject">
-											</div>
-											<div class="form-group">
-												<textarea name="message" id="email_message" class="form-control" placeholder="Message" style="height: 120px;"></textarea>
-											</div>
-											<div class="form-group">														<input type="file" name="attachment">
-											</div>
+											
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Discard</button>
@@ -469,10 +470,29 @@ button:hover {
 	<!-- END INBOX -->
 </div>
 <input type="text" class="inboxData" value="{{data}}" style="display: none;">
+<input type="text" class="account_number" value="{{data1}}" style="display: none;">
 </div>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+
+function submitQuery(){
+	event.preventDefault();
+	 $('#compose-modal').modal('toggle');
+	$.ajax({
+		type: 'POST',
+		url: "/auth/submitQuery",
+		data: { account_number :document.getElementById("account_number").value, subject:document.getElementById("subject").value , message:document.getElementById("message").value },
+		dataType: 'json',
+		success: function (result) {
+			alert(result)
+		},
+		error: function (request, status, error) {
+			console.log("Query not submitted")
+		}
+	});
+  
+}
 
 function togglePopup(value,id,ele){
 	document.getElementById("message1").innerHTML= data[value].message;
@@ -483,6 +503,15 @@ function togglePopup(value,id,ele){
 		update(id)
 	}
 }
+
+function queryTogglePopup(id,query,subject){
+	
+	document.getElementById("heading").innerHTML= subject;
+	document.getElementById("message1").innerHTML= query;
+	document.getElementById("popup-1").classList.toggle("active");
+	
+}
+
 function update(id){
 	event.preventDefault();
 	
@@ -527,16 +556,90 @@ function del(list){
         url: "/auth/inbox",
         data: { array:list , del :"Y" },
         success: function (result) {
-            console.log(result);
+            alert("Message Deleted");
+			location.reload();
         },
         error: function (request, status, error) {
             serviceError();
         }
     });
 	
-}	
+}
+
+function query_info(result){
+	var data= JSON.parse(result);
+	var block="";
+	var flag=0;
+	list=[];
+	icon=""
+	if(data.length == 0){
+		block="<tr>No messages</tr>"
+	}
+	for(i=0; i<data.length;i++){
+		 
+		 data[i].date = new Date(data[i].date);
+         data[i].date= data[i].date.getFullYear()+'-' + (data[i].date.getMonth()+1) + '-'+data[i].date.getDate();
+		 str='onclick=\'queryTogglePopup('+data[i].Query_id+',"'+data[i].Query+'","'+data[i].subject+'")\''
+		 console.log(str)
+		 block+='<tr class='+value+'><td class="time">'+data[i].date+'</td><td class="time">'+data[i].subject+'</td><td class="subject"><a href="#"'+ str+'  maxlength="40">'+data[i].Query+'</a></td><td class="time">'+data[i].time+'</td></tr>'
+	}
+	document.getElementById("messages").innerHTML=block;
+}
+
+function query_onchange(){
+	$.ajax({
+        type: 'POST',
+        url: "/auth/Queries",
+        data: { account_number: document.getElementById("acc_number").value },
+        success: function (result) {
+            query_info(result)
+        },
+        error: function (request, status, error) {
+            console.log("failure")
+        }
+    });
+}
+
+function queries(){
+	event.preventDefault();
+	document.getElementById("action").style.display="none";
+
+	var data1= JSON.parse(document.querySelector(".account_number").value);
+	var block2="";
+
+	if(data1.length == 0){
+		block2='<option value="NULL">No Account</option>'
+	}
+
+	for(i=0; i<data1.length;i++){
+		block2+='<option value="'+data1[i].accountno+'">'+data1[i].accountno+'</option>'
+	}
+	console.log(block2);
+	document.getElementById("acc_number").innerHTML=block2;
+
+	document.getElementById("account_queries").style.display="block";
+
+	document.getElementById('Inbox').classList.remove('active');
+	document.getElementById('Queries').classList.add('active');
+
+    $.ajax({
+        type: 'POST',
+        url: "/auth/Queries",
+        data: { account_number: document.getElementById("acc_number").value },
+        success: function (result) {
+            query_info(result)
+        },
+        error: function (request, status, error) {
+            console.log("failure")
+        }
+    });
+
+	
+	
+}
 </script>
 <script>
+
 	var data= JSON.parse(document.querySelector(".inboxData").value);
 	var block="";
 	var flag=0;
@@ -564,6 +667,17 @@ function del(list){
 	
     document.getElementById("messages").innerHTML=block;
    
+    var data1= JSON.parse(document.querySelector(".account_number").value);
+	var block2="";
+
+	if(data1.length == 0){
+		block2='<option value="NULL">No Account</option>'
+	}
+	for(i=0; i<data1.length;i++){
+			block2+='<option value="'+data1[i].accountno+'">'+data1[i].accountno+'</option>'
+	}
+	console.log(block2);
+	document.getElementById("account_number").innerHTML=block2;
 	
 
 </script>
