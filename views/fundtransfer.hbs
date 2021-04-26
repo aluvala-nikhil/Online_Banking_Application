@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fund Transfer page</title>
     <!-- Linking CSS-->
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/fundtransfer-css/style.css">
 </head>
 <body>
     <header>
@@ -23,20 +23,15 @@
         </ul>
             <a class="logout" href="#"><button>Logout</button></a>
     </header>
-
+    
     <div class="form-wrapper" style="padding:0px">
-        <form action="">
+        <form action="/auth/fundtransfer" method="POST">
             <div>
                 <div style="width: 14%; float:left ; padding-left: 20px;">
-                <label for="Student" > Account Number : </label>
+                <label for="Account_number" > Account Number : </label>
                 </div>
                 <div style="width: 84%; float:left;">
-                <select name="" id="" style="width: 20%;">
-                    <option value="">xxxxxxxxx</option>
-                    <option value="">xxxxxxxxx</option>
-                    <option value="">xxxxxxxxx</option>
-                    <option value="">xxxxxxxxx</option>
-                </select>
+                <select name="acc[]" id="Account_number" style="width: 20%;"></select>
                 </div>
             </div>
             <div style="margin-top: 3%;">
@@ -44,16 +39,15 @@
                 <label for="Student">Transfer Type: </label>
                 </div>
                 <div style="width: 84%; float:left;">
-                <select name="" id="" style="width: 20%;">
-                    <option value="">Transfer Now</option>
-                    <option value="">Schedule Payment</option>
-                    <option value="">Set Standing Instruction</option>
+                <select name="transfer_type" id="transfer_type" style="width: 20% ;" onchange="changeFunc()">
+                    <option value="Transfer_Now">Transfer Now</option>
+                    <option value="SI">Set Standing Instruction</option>
                 </select>
                 </div>
             </div>
 
             
-            <div style="margin-top: 6%;">
+            <div id="Start_Date" style="margin-top: 6%; display: none">
                 <div style="width: 14%; float:left ; padding-left: 20px;">
                     <label for="" style="width:80%; float: left;">Start Date:</label>
                 </div>
@@ -61,7 +55,7 @@
                     <input type="date" id="" name="">
                 </div>
             </div>
-            <div style="margin-top: 9%;">
+            <div id="Frequency" style="margin-top: 9%; display: none">
                 <div style="width: 14%; float:left ; padding-left: 20px;">
                     <label for="" style="width:80%; float: left;">Frequency:</label>
                 </div>
@@ -74,7 +68,7 @@
                     <option value="">Yearly</option>
                 </select>
             </div>
-            <div style="margin-top: 2%;">
+            <div id="Number_of_Times" style="margin-top: 2%; display: none">
                 <div style="width: 14%; float:left ; padding-left: 20px;">
                     <label for="" style="width:80%; float: left;">Number of Times:</label>
                 </div>
@@ -91,13 +85,12 @@
                     <option value="">10</option>
                 </select>
             </div>
-            <div style="margin-top: 2%;">
+            <div id="End_Date" style="margin-top: 2%; display: none">
                 <div style="width: 14%; float:left ; padding-left: 20px;">
                     <label for="" style="width:80%; float: left;">End Date:</label>
                 </div>
                 <input type="date" id="" name="">
             </div>
-        </form>
     </div>
 
 
@@ -118,8 +111,8 @@
                   <option value="">Select Beneficiary</option>
               </select>
           </td>
-          <td><textarea name="" id="" cols="40" rows="1"></textarea></td>
-          <td><textarea name="" id="" cols="40" rows="1"></textarea></td>
+          <td><input name="description" id="" cols="40" rows="1"></input></td>
+          <td><input name="amount" id="" cols="40" rows="1"></input></td>
         </tr>
         <tr>
             <td><a href="#">Click here to select another Beneficiary</a></td>
@@ -131,5 +124,40 @@
     <div class="btn">
         <button type="submit">Back</button>
     </div>
+    </form>
+    <input type="text" class="fund_transfer" value="{{data}}" style="display: none;">
+    
 </body>
 </html>
+
+<script>
+	var data= JSON.parse(document.querySelector(".fund_transfer").value);
+    var block="";
+    if(data.length == 0){
+		block='<option value="NULL">No Account</option>'
+	}
+	for(i=0; i<data.length;i++){
+		 block+='<option value="'+data[i].accountno+'">'+data[i].accountno+'</option>'
+	}
+	document.getElementById("Account_number").innerHTML=block;
+
+</script>
+
+<script>
+    function changeFunc(){
+        var option = document.getElementById("transfer_type").value;
+        if (option == "SI"){
+            document.getElementById("Start_Date").style.display = "block"
+            document.getElementById("Frequency").style.display = "block"
+            document.getElementById("Number_of_Times").style.display = "block"
+            document.getElementById("End_Date").style.display = "block"
+        }
+        else{
+            document.getElementById("Start_Date").style.display = "none"
+            document.getElementById("Frequency").style.display = "none"
+            document.getElementById("Number_of_Times").style.display = "none"
+            document.getElementById("End_Date").style.display = "none"
+        }
+    }
+    
+</script>

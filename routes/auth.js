@@ -13,4 +13,8 @@ router.post('/inbox',authController.inbox);
 
 router.post('/transaction',authController.transaction);
 
+router.post('/payee',authController.payee);
+
+router.post('/fundtransfer',authController.fundtransfer);
+
 module.exports=router; 
