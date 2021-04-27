@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>Credit Card page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Custom Style-->
+    <link rel="stylesheet" href="/profile-css/style.css">
+    <style>
+          header {
+          background-color: #1c1c1c;
+          padding: 10px;
+          display: inline-flex;
+          justify-content: space-between;
+          text-align: center;
+          box-shadow: 0 0 3px royalblue;
+          width: 100%;
+        }
+
+        .logo {
+          color: #fff;
+          padding-left: 20px;
+          font-weight: bold;
+        }
+        header li {
+          display: inline;
+          padding-left: 40px;
+        }
+
+        header li a {
+          color: #fff;
+          text-decoration: none;
+          padding: 13px;
+          transition: 0.3s ease;
+          font-size: 17px;
+          
+        }
+
+        header li a:hover,
+        .active {
+          color: royalblue;
+        }
+
+        button {
+          padding: 9px 25px;
+          background-color: rgba(105, 133, 214, 0.748);
+          border: none;
+          border-radius: 50px;
+          cursor: pointer;
+          transition: all 0.3s ease 0s;
+          font-size: 15px;
+          margin-top: 0px;
+          margin-right: 13px;
+          color: white;
+        }
+
+        button:hover {
+          background-color: #4169e1;
+        }
+
+        .label {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 15px;
+        user-select: none;
+        color: #999999;
+        text-align: left;
+        margin-left: 50px;
+        }
+
+        .label input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        }
+
+        
+        .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border-radius: 50%;
+        }
+
+        /* On mouse-over, add a grey background color */
+        .label:hover input ~ .checkmark {
+        background-color: #ccc;
+        }
+
+        /* When the radio button is checked, add a blue background */
+        .label input:checked ~ .checkmark {
+        background-color: #2196F3;
+        }
+
+        /* Create the indicator (the dot/circle - hidden when not checked) */
+        .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+        }
+
+        /* Show the indicator (dot/circle) when checked */
+        .label input:checked ~ .checkmark:after {
+        display: block;
+        }
+
+        /* Style the indicator (dot/circle) */
+        .label .checkmark:after {
+            top: 9px;
+            left: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .panel-title{
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+  <header style="position: absolute;">
+		<div class="logo">
+			<h2 style="font-size:20px; margin-top:15px">Online Banking</h2>
+		</div>
+        <ul style="margin-top:10px">
+            <li><a href="/main" >Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/account" >Account</a></li>
+            <li><a href="/inbox">Notification</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+        <a class="logout" href="/logout"><button>Logout</button></a>
+    </header>
+
+  <div class="container bootstrap snippets bootdeys" style="padding-top:120px">
+  <div class="row" style="display: flex;align-items: center;justify-content: center;">
+    <div class="col-xs-12 col-sm-10">
+      <form action="#" method="POST" class="form-horizontal">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+          <h4 class="panel-title">Last Payment Details</h4>
+          </div>
+          <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Account no:</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="accountno" id="accountno" class="form-control" value="a" disabled>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Amount:</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="Amount" id="Amount" class="form-control" value="b" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Date:</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="date" id="date1" class="form-control" value="yyyy-MM-dd" disabled>
+                    </div>
+                </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+          <h4 class="panel-title">Next Due</h4>
+          </div>
+          <div class="panel-body">
+              <div class="form-group">
+                    <label class="col-sm-2 control-label">Account no:</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="dueAccountno" id="dueAccountno" class="form-control" value="d" disabled>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Amount:</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="dueAmount"  id="dueAmount" class="form-control"  disabled>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Date:</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="dueDate" id="dueDate" class="form-control"  disabled>
+                    </div>
+                </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+          <h4 class="panel-title">Clear Dues</h4>
+          </div>
+          <div class="panel-body">
+                <div class="form-group">
+                    <h4 style="margin-left: 50px;color:#999999">Select the account from which money has to be transferred</h4>
+                
+
+                    <div style="margin-top: 3%;width: 100%;margin-left:50px;margin-bottom:60px">
+                      <div style="width:15.4%; float: left;">
+                        <input type="radio" name="selector" id="account_savings" value="" onclick="document.getElementById('account_savings_value').disabled = false; document.getElementById('account_current_value').disabled = true;"  />Savings :  
+                      </div>
+                      <div style="width:80%; float: left;">
+                        <select name="account_savings_value" id="account_savings_value" style="width: 13%;"  disabled="disabled">
+                          
+                        </select>
+                      </div>
+                    </div>
+
+                    <div style="margin-top: 3%;width: 100%;margin-left:50px">
+                      <div style="width:15.4%; float: left;">
+                        <input type="radio" name="selector" id="account_current" value="" onclick="document.getElementById('account_current_value').disabled = false; document.getElementById('account_savings_value').disabled = true;"  />Current :  
+                      </div>
+                      <div style="width:80%; float: left;">
+                        <select name="account_current_value" id="account_current_value" style="width: 13%;"  disabled="disabled">
+                          
+                        </select>
+                      </div>
+                    </div>
+ 
+                    <div class="col-sm-10 " style="margin-top:15px;margin-left:35px">
+                        <button type="submit" class="btn btn-primary" name="submit_button" onclick="payment()">Submit</button>
+                        <button type="reset" class="btn btn-default"><a href="main.hbs">Cancel</a></button>
+                    </div>
+                </div>
+          </div>
+        </div>
+        <div id="pass"></div>
+      </form>
+      <input type="text" class="credit_data" value="{{data}}" style="display: none;">
+      <input type="text" class="credit_transaction_data" value="{{data1}}" style="display: none;">
+      <input type="text" class="account_data" value="{{data2}}" style="display: none;">
+    </div>
+    
+  </div>
+  </div>
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+  var data= JSON.parse(document.querySelector(".credit_data").value);
+  var data1= JSON.parse(document.querySelector(".credit_transaction_data").value);
+  var data2= JSON.parse(document.querySelector(".account_data").value);
+  console.log(data)
+  console.log(data1)
+
+  if(data1.length==0){
+     document.getElementById("accountno").value="No Previous Transactions"
+     document.getElementById("Amount").value="No Previous Transactions"
+     document.getElementById("date1").value="No Previous Transactions"
+  }
+  else{
+    data1=data1.reverse()
+    document.getElementById("accountno").value=data1[0].accountno
+    document.getElementById("Amount").value=data1[0].amount
+    var d = new Date(data1[0].date);
+    date = String(d).slice(0,15);
+    document.getElementById("date1").value=date
+  }
+
+  if(data[0].no_of_instances*data[0].periodicty == data1.length){
+    document.getElementById("dueAccountno").value=data[0].accountno
+    document.getElementById("dueAmount").value="Amount Paid"
+    document.getElementById("dueDate").value="NaN"
+  }
+  else{
+    console.log(data[0].periodicty)
+    document.getElementById("dueAccountno").value=data[0].accountno
+    document.getElementById("dueAmount").value=data[0].amount
+    
+    var dt = new Date(data[0].startdate);
+    dt.setMonth( dt.getMonth() +  data1.length+1 );
+    date = String(dt).slice(0,15);
+    document.getElementById("dueDate").value=date
+
+  }
+
+  block1=""
+  block2=""
+
+  for(i=0; i<data2.length;i++){
+    if(data2[i].category=="savings"){
+      block1+='<option value="'+data2[i].accountno+'">'+data2[i].accountno+'</option>'
+    }
+    else if(data2[i].category=="current"){
+      block2+='<option value="'+data2[i].accountno+'">'+data2[i].accountno+'</option>'
+    }	 
+	}
+  document.getElementById("account_savings_value").innerHTML=block1;
+  document.getElementById("account_current_value").innerHTML=block2;
+
+</script>
+
+<script>
+  function payment(){
+    event.preventDefault();
+    var data= JSON.parse(document.querySelector(".credit_data").value);
+    var data1= JSON.parse(document.querySelector(".credit_transaction_data").value);
+    if(data[0].no_of_instances*data[0].periodicty != data1.length){
+      
+      url=window.location
+      var pathname = new URL(url).pathname;
+      console.log(pathname)
+      credit_accountno = pathname.replace("/creditCard/", "");
+      console.log(pathname)
+
+      if(document.getElementById('account_savings').checked) {
+
+        var data = document.getElementById("account_savings_value").value
+        console.log(data)
+
+        $.ajax({
+          type: 'POST',
+          url: "/auth/creditCardPayment",
+          data: { accountno : data, credit_accountno:credit_accountno},
+          dataType: 'json',
+          success: function (result) {
+            alert(result)
+            location.reload()
+          },
+          error: function (request, status, error) {
+            alert("Credit Card Payment Failed")
+          }
+        });
+      }
+      else if(document.getElementById('account_current').checked) {
+        var data = document.getElementById("account_current_value").value
+        console.log(data)
+
+        $.ajax({
+          type: 'POST',
+          url: "/auth/creditCardPayment",
+          data: { accountno : data, credit_accountno:credit_accountno},
+          dataType: 'json',
+          success: function (result) {
+            alert(result)
+            location.reload()
+          },
+          error: function (request, status, error) {
+            alert("Credit Payment Failed")
+          }
+        });
+      }
+    }
+    else{
+      alert("Amount Paid")
+    }
+    
+  }
+</script>
+</body>
+</html>

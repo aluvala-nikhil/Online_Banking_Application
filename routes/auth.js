@@ -17,5 +17,10 @@ router.post('/submitQuery',authController.submitQuery);
 
 router.post('/Queries',authController.Queries);
 
+router.post('/homeLoanPayment',authController.homeLoanPayment);
+
+router.post('/creditCardPayment',authController.creditCardPayment);
+
+router.post('/deleteAccount',authController.deleteAccount);
 
 module.exports=router; 
