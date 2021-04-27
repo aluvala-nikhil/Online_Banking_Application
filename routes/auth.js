@@ -23,5 +23,10 @@ router.post('/Queries',authController.Queries);
 
 router.post('/deletePayee',authController.deletePayee);
 
+router.post('/homeLoanPayment',authController.homeLoanPayment);
+
+router.post('/creditCardPayment',authController.creditCardPayment);
+
+router.post('/deleteAccount',authController.deleteAccount);
 
 module.exports=router; 

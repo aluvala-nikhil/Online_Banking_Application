@@ -323,7 +323,7 @@ exports.fundtransfer = (req,res) =>{
     const description = req.body.description
     const amount =req.body.amount
     const toaccno = req.body.to_acc
-    
+
     if(transfer_type == "Transfer_Now"){
         db.query('SELECT balance FROM accounts WHERE accountno = ?',[accno], function (err, bal) {
             db.query('SELECT balance FROM accounts WHERE accountno = ?',[toaccno], function (err, bal1) {
@@ -398,3 +398,95 @@ exports.deletePayee = (req,res) =>{
     }) 
 }
 
+
+exports.homeLoanPayment = (req,res) =>{
+    if(req.session.loggedinUser){
+        db.query("SELECT * from accounts where accountno= ?",[req.body.accountno], function(err,data){
+            if (err) throw err;
+            
+            db.query("SELECT * from payments where accountno= ?",[req.body.loan_accountno], function(err1,data1){
+                if (err1) throw err1;
+
+                if(data[0].balance>=data1[0].amount){
+                    db.query("UPDATE accounts SET balance=? where accountno=?",[[data[0].balance - data1[0].amount],[req.body.accountno]], function(err2,data2){
+                        if (err2) throw err2;
+                        db.query("UPDATE accounts SET balance= balance-? where accountno=?",[[data1[0].amount],[req.body.loan_accountno]], function(err5,data5){
+                            if (err5) throw err5;
+                            db.query("INSERT INTO transactions(transtype, amount, description, payment_type, accountno) VALUES (?,?,?,?,?) ",[["payment"],[20000],["Home Loan Amount"],["debit"],[req.body.loan_accountno]], function(err3,data3){
+                                if (err3) throw err3;
+                                db.query("INSERT INTO transactions(transtype, amount, description, payment_type, accountno) VALUES (?,?,?,?,?) ",[["payment"],[20000],["For Home Loan"],["debit"],[req.body.accountno]], function(err4,data4){
+                                    if (err4) throw err4;
+                                    res.send(JSON.stringify("Loan Payment Succeeded"))
+                                });
+                            });
+                        });
+                    });
+                }
+                else{
+                    res.send(JSON.stringify("Loan Payment Failed  due to Insufficient Balance"))
+                }
+            });
+        });
+    }
+    else{
+        res.render('login');
+    }
+}
+
+exports.creditCardPayment = (req,res) =>{
+    if(req.session.loggedinUser){
+        db.query("SELECT * from accounts where accountno= ?",[req.body.accountno], function(err,data){
+            if (err) throw err;
+            
+            db.query("SELECT * from payments where accountno= ?",[req.body.credit_accountno], function(err1,data1){
+                if (err1) throw err1;
+
+                if(data[0].balance>=data1[0].amount){
+                    db.query("UPDATE accounts SET balance=? where accountno=?",[[data[0].balance - data1[0].amount],[req.body.accountno]], function(err2,data2){
+                        if (err2) throw err2;
+                        db.query("UPDATE accounts SET balance=balance-? where accountno=?",[[data1[0].amount],[req.body.credit_accountno]], function(err5,data5){
+                            if (err5) throw err5;
+                            db.query("INSERT INTO transactions(transtype, amount, description, payment_type, accountno) VALUES (?,?,?,?,?) ",[["payment"],[20000],["Credit Card Payment"],["debit"],[req.body.credit_accountno]], function(err3,data3){
+                                if (err3) throw err3;
+                                db.query("INSERT INTO transactions(transtype, amount, description, payment_type, accountno) VALUES (?,?,?,?,?) ",[["payment"],[20000],["For Credit Crad"],["debit"],[req.body.accountno]], function(err4,data4){
+                                    if (err4) throw err4;
+                                    res.send(JSON.stringify("Credit Card Payment Succeeded"))
+                                });
+                            });
+                        });
+                    });
+                }
+                else{
+                    res.send(JSON.stringify("Credit Crad Payment Failed  due to Insufficient Balance"))
+                }
+            });
+        });
+    }
+    else{
+        res.render('login');
+    }
+}
+
+exports.deleteAccount = (req,res) =>{
+    if(req.session.loggedinUser){
+        console.log(req.body.accountno)
+        db.query("SELECT * from accounts where accountno= ?",[req.body.accountno], function(err,data){
+            if(data[0].balance==0){
+                db.query("DELETE from accounts where accountno=?",[req.body.accountno], function(err1,data1){
+                    if (err){
+                        res.send(JSON.stringify("Delete Account Failed"))
+                    }else{
+                        res.send(JSON.stringify("Delete Account Successfully"))
+                    }
+                    
+                }) 
+            }
+            else{
+                res.send(JSON.stringify("Contact Customer Care"))
+            }
+        });
+    }
+    else{
+        res.render('login');
+    }
+}
