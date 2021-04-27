@@ -135,6 +135,7 @@ router.get('/transaction',(req,res) => {
 
 })
 
+<<<<<<< HEAD
 router.get('/homeLoan/:accountno',(req,res) => {
     const accountno = req.params.accountno;
     if(req.session.loggedinUser){
@@ -152,10 +153,21 @@ router.get('/homeLoan/:accountno',(req,res) => {
     }
     else{
         res.render('login');
+=======
+router.get('/fundtransfer',(req,res)=>{
+    if(req.session.loggedinUser){
+        db.query('SELECT * FROM accounts WHERE userid=?',[req.session.userid], function (err, data) {
+            if (err) throw err;
+            res.render('fundtransfer',{data:JSON.stringify(data)})  
+        
+        });
+        
+>>>>>>> 39d94096c58c94a454d01798454bce765f40162f
     }
 
 })
 
+<<<<<<< HEAD
 router.get('/creditCard/:accountno',(req,res) => {
     const accountno = req.params.accountno;
     if(req.session.loggedinUser){
@@ -176,6 +188,20 @@ router.get('/creditCard/:accountno',(req,res) => {
     }
 
 })
+=======
+router.get('/payee',(req,res)=>{
+    if(req.session.loggedinUser){
+        db.query('SELECT * FROM payees WHERE userid=?',[req.session.userid], function (err, data) {
+            if (err) throw err;
+            res.render('payee',{data:JSON.stringify(data)})  
+        
+        });
+        
+    }
+    
+})
+
+>>>>>>> 39d94096c58c94a454d01798454bce765f40162f
 
 
 module.exports=router;

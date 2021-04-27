@@ -13,6 +13,10 @@ router.post('/inbox',authController.inbox);
 
 router.post('/transaction',authController.transaction);
 
+router.post('/payee',authController.payee);
+
+router.post('/fundtransfer',authController.fundtransfer);
+
 router.post('/submitQuery',authController.submitQuery);
 
 router.post('/Queries',authController.Queries);

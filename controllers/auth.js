@@ -233,6 +233,8 @@ exports.profile = (req,res)=> {
     
     
 }
+
+
 exports.inbox = (req,res) =>{
     
     if(req.body.del == "N"){
@@ -296,6 +298,39 @@ exports.transaction = (req,res) =>{
     }
     else{
         res.render('login');
+    }
+}
+
+exports.payee  = (req,res) =>{
+    if(req.session.loggedinUser){
+        const name = req.body.name;
+        const bank_name = req.body.bank_name;
+        const branch_name = req.body.branch_name;
+        const account_number = req.body.account_number;
+        const ifsc_code = req.body.ifsc_code;
+        db.query('INSERT INTO payees SET ?',[{userid:req.session.userid,accountnumber:account_number,name:name,bankname:bank_name,branchname:branch_name,ifsc_code:ifsc_code}], function (err, data) {
+            if (err) throw err;
+            res.status(200).redirect("/payee")
+        });
+
+
+    }
+}
+
+exports.fundtransfer = (req,res) =>{
+    const transfer_type = req.body.transfer_type
+    const accno = req.body['acc[]']
+    const description = req.body.description
+    const amount =req.body.amount
+    if(transfer_type == "Transfer_Now"){
+        
+        db.query('INSERT INTO transactions SET ?',[{transtype:"fundtransfer",amount:amount,description:description,payment_type:"debit",accountno:accno}], function (err, data) {
+            if (err) throw err;
+            res.status(200).redirect("/payee")
+        });
+        db.query('UPDATE accounts SET balance = ? where accountno = ?',[[balance-amount],accno], function (err, data) {
+
+        });
     }
 }
 

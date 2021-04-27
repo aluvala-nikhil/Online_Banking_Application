@@ -13,7 +13,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="./css/style.css"/>
+    <link rel="stylesheet" href="/payee-css/style.css"/>
     <title>My Payees</title>
   </head>
   <body>
@@ -42,17 +42,18 @@
           <i class="fas fa-times" onclick="toggleLogin()"></i>
         </div>
         <div class="body">
-          <form action="#" class="form">
-            <input type="text" placeholder="Name"/>
-            <input type="text" placeholder="Bank Name"/>
-            <input type="text" placeholder="Branch Name"/>
-            <input type="Number" placeholder="Account Number"/>
-            <input type="text" placeholder="IFSC Code"/>
+          <form action="/auth/payee" method="POST" class="form">
+            <input type="text" name ="name" placeholder="Name"/>
+            <input type="text" name="bank_name" placeholder="Bank Name"/>
+            <input type="text" name="branch_name" placeholder="Branch Name"/>
+            <input type="Number" name="account_number" placeholder="Account Number"/>
+            <input type="text" name="ifsc_code" placeholder="IFSC Code"/>
+            <div class="footer">
+            <button type="submit">Add Now</button>
+            </div>
           </form>
         </div>
-        <div class="footer">
-          <button>Add Now</button>
-        </div>
+        
       </div>
     </div>
     <!-- My payee Heading -->
@@ -60,6 +61,7 @@
     <!-- My payee Heading -->
 
     <!-- My payees -->
+    <div id="My_payees">
     <div class="grid-container" style="padding-left: 25px;">
         <div class="courses-container">
             <div class="course">
@@ -203,8 +205,8 @@
             </div>
         </div>
     </div>
-
-    
+    </div>
+    <input type="text" class="payee" value="{{data}}" style="display: none;">
     <!-- My payees -->
   </body>
   <script>
@@ -213,3 +215,20 @@
     }
   </script>
 </html>
+<script>
+	var data= JSON.parse(document.querySelector(".payee").value);
+    var block="";
+    if(data.length == 0){
+		block='<h1> No payees </h1>'
+	}
+    for(i=0; i+1<data.length;i+=2){
+        
+        block+='<div class="grid-container" style="padding-left: 25px;"><div class="courses-container"><div class="course"><div class="course-preview"><h6>Name</h6><h2>'+data[i].name+'</h2><div class="btn1"><a href="#"><button>Delete</button></a></div></div><div class="course-info"><h6>Bank Name</h6><h3>'+data[i].bankname+'</h3><h6>Branch Name</h6><h3>'+data[i].branchname+'</h3><h6>Account Number</h6><h3>'+data[i].accountnumber+'</h3><h6>IFSC Code</h6><h3>'+data[i].ifsc_code+'</h3><button class="btnt">Transfer</button></div></div></div><div class="courses-container"><div class="course"><div class="course-preview" id="my_header"><h6>Name</h6><h2>'+data[i+1].name+'</h2><div class="btn1"><a href="#"><button>Delete</button></a></div></div><div class="course-info"><h6>Bank Name</h6><h3>'+data[i+1].bankname+'</h3><h6>Branch Name</h6><h3>'+data[i+1].branchname+'</h3><h6>Account Number</h6><h3>'+data[i+1].accountnumber+'</h3><h6>IFSC Code</h6><h3>'+data[i+1].ifsc_code+'</h3><button class="btnt">Transfer</button></div></div></div></div>'
+	}
+    if(data.length % 2 != 0){
+        i=data.length-1
+        block+='<div class="grid-container" style="padding-left: 25px;"><div class="courses-container"><div class="course"><div class="course-preview"><h6>Name</h6><h2>'+data[i].name+'</h2><div class="btn1"><a href="#"><button>Delete</button></a></div></div><div class="course-info"><h6>Bank Name</h6><h3>'+data[i].bankname+'</h3><h6>Branch Name</h6><h3>'+data[i].branchname+'</h3><h6>Account Number</h6><h3>'+data[i].accountnumber+'</h3><h6>IFSC Code</h6><h3>'+data[i].ifsc_code+'</h3><button class="btnt">Transfer</button></div></div></div></div>'
+    }
+    document.getElementById("My_payees").innerHTML=block;
+
+</script>
