@@ -144,7 +144,7 @@ router.get('/fundtransfer/:accountno',(req,res) => {
         });
         
     }
-    
+})
 
 router.get('/homeLoan/:accountno',(req,res) => {
     const accountno = req.params.accountno;
