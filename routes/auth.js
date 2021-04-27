@@ -21,5 +21,7 @@ router.post('/submitQuery',authController.submitQuery);
 
 router.post('/Queries',authController.Queries);
 
+router.post('/deletePayee',authController.deletePayee);
+
 
 module.exports=router; 

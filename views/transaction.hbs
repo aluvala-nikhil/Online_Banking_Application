@@ -14,13 +14,13 @@
 			<h2>Online Banking</h2>
 		</div>
     <ul>
-      <li><a href="#" class="active">Home</a></li>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Home</a></li>
+        <li><a href="/main" >Home</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="#" class="active">Account</a></li>
+        <li><a href="/inbox">Notification</a></li>
+        <li><a href="#">About Us</a></li>
     </ul>
-		<a class="logout" href="#"><button>Logout</button></a>
+		<a class="logout" href="/logout"><button>Logout</button></a>
   </header>
 
   <div class="form-wrapper" style="padding:0px">
@@ -190,9 +190,7 @@ function trans_history(data){
 
   url=window.location
   var pathname = new URL(url).pathname;
-  console.log(pathname)
   pathname = pathname.replace("/transaction/", "");
-  console.log(pathname)
   if(pathname!=""){
     document.getElementById("Account_number").value=pathname
   }

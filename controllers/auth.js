@@ -322,15 +322,44 @@ exports.fundtransfer = (req,res) =>{
     const accno = req.body['acc[]']
     const description = req.body.description
     const amount =req.body.amount
+    const toaccno = req.body.to_acc
+    
     if(transfer_type == "Transfer_Now"){
-        
-        db.query('INSERT INTO transactions SET ?',[{transtype:"fundtransfer",amount:amount,description:description,payment_type:"debit",accountno:accno}], function (err, data) {
-            if (err) throw err;
-            res.status(200).redirect("/payee")
-        });
-        db.query('UPDATE accounts SET balance = ? where accountno = ?',[[balance-amount],accno], function (err, data) {
+        db.query('SELECT balance FROM accounts WHERE accountno = ?',[accno], function (err, bal) {
+            db.query('SELECT balance FROM accounts WHERE accountno = ?',[toaccno], function (err, bal1) {
+                if (bal[0].balance >= amount){
+                    db.query('INSERT INTO transactions SET ?',[{transtype:"fundtransfer",amount:amount,description:description,payment_type:"debit",accountno:accno}], function (err, data) {
+                        if (err) throw err;
+                    });
+                    db.query('UPDATE accounts SET ? where accountno = ?',[{balance:bal[0].balance-amount},[accno]], function (err, data) {
+                        if (err) throw err;
+                    });
 
-        });
+                    db.query('SELECT max(transid) max FROM transactions where accountno = ?',[accno], function (err, d) {
+                        db.query('UPDATE accounts SET ? where accountno = ?',[{balance:+bal1[0].balance + +amount},[toaccno]], function (err, data) {
+                            if (err) throw err;
+                        });
+                        db.query('INSERT INTO transactions SET ?',[{transtype:"fundtransfer",amount:amount,description:description,payment_type:"credit",accountno:toaccno}], function (err, data) {
+                            if (err) throw err;
+                        });
+                        db.query('UPDATE transactions SET ? where transid in (SELECT max(transid) FROM transactions) ',[{transid : d[0].max}], function (err, data) {
+                            if (err) throw err;
+                        });
+
+                        res.send(JSON.stringify("Fund transaction Successful , transaction id is "+d[0].max))
+
+                    });
+                    
+                    
+                 }
+                else{
+                    res.send(JSON.stringify("no sufficient balance"))
+                }
+            });
+        }); 
+    }
+    else{
+
     }
 }
 
@@ -357,3 +386,15 @@ exports.Queries = (req,res) =>{
         res.render('login');
     }
 }
+
+exports.deletePayee = (req,res) =>{
+    db.query("DELETE from payees where accountnumber=?",[req.body.accountno], function(err,data){
+        if (err){
+            res.send(JSON.stringify("Delete Payee Failed"))
+        }else{
+            res.send(JSON.stringify("Delete Payee Successful"))
+        }
+
+    }) 
+}
+

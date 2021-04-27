@@ -14,14 +14,13 @@
                 <h2>Online Banking</h2>
             </div>
         <ul>
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Home</a></li>
+            <li><a href="/main" >Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="#" class="active">Account</a></li>
+            <li><a href="/inbox">Notification</a></li>
+            <li><a href="#">About Us</a></li>
         </ul>
-            <a class="logout" href="#"><button>Logout</button></a>
+            <a class="logout" href="/logout"><button>Logout</button></a>
     </header>
     
     <div class="form-wrapper" style="padding:0px">
@@ -102,14 +101,7 @@
         </tr>
         <tr>
           <td>
-              <select name="" id="" style="width: 30%;">
-                  <option value="">Select Beneficiary</option>
-                  <option value="">Select Beneficiary</option>
-                  <option value="">Select Beneficiary</option>
-                  <option value="">Select Beneficiary</option>
-                  <option value="">Select Beneficiary</option>
-                  <option value="">Select Beneficiary</option>
-              </select>
+              <input type="number" name="to_acc" id="to_acc" value=""></input>
           </td>
           <td><input name="description" id="" cols="40" rows="1"></input></td>
           <td><input name="amount" id="" cols="40" rows="1"></input></td>
@@ -119,10 +111,7 @@
         </tr>
     </table>
     <div class="btn">
-        <button type="submit" style="margin-right: 3%;">Continue</button>
-    </div>
-    <div class="btn">
-        <button type="submit">Back</button>
+        <button type="submit" style="margin-right: 3%;">Submit</button>
     </div>
     </form>
     <input type="text" class="fund_transfer" value="{{data}}" style="display: none;">
@@ -140,6 +129,14 @@
 		 block+='<option value="'+data[i].accountno+'">'+data[i].accountno+'</option>'
 	}
 	document.getElementById("Account_number").innerHTML=block;
+    url=window.location
+    var pathname = new URL(url).pathname;
+    pathname = pathname.replace("/fundtransfer/", "");
+    var accno = pathname.split("to")
+    if(pathname!=""){
+        document.getElementById("Account_number").value = accno[0]
+    }
+    document.getElementById("to_acc").value = accno[1]
 
 </script>
 

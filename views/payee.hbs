@@ -8,6 +8,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
       rel="stylesheet"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link
       href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
       rel="stylesheet"
@@ -24,13 +25,13 @@
             <h2>Online Banking</h2>
         </div>
         <ul>
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Home</a></li>
+            <li><a href="/main" >Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="#" class="active">Account</a></li>
+            <li><a href="/inbox">Notification</a></li>
+            <li><a href="#">About Us</a></li>
         </ul>
-        <a class="logout" href="#"><button>Logout</button></a>
+        <a class="logout" href="/logout"><button>Logout</button></a>
     </header>
     <!-- Header -->
 
@@ -62,157 +63,40 @@
 
     <!-- My payees -->
     <div id="My_payees">
-    <div class="grid-container" style="padding-left: 25px;">
-        <div class="courses-container">
-            <div class="course">
-                <div class="course-preview" id="my_header">
-                    <h6>Name</h6>
-                    <h2>A. Nikhil</h2>
-                    <div class="btn1">
-                        <a href="#"><button>Delete</button></a>
-                    </div>
-                </div>
-                <div class="course-info">
-                    <h6>Bank Name</h6>
-                    <h3>SBI</h3>
-                    <h6>Branch Name</h6>
-                    <h3>Badvel</h3>
-                    <h6>Account Number</h6>
-                    <h3>xxxxxxxxxxxxxxxx</h3>
-                    <h6>IFSC Code</h6>
-                    <h3>SBIN00000000</h3>
-                    <button class="btnt">Transfer</button>
-                </div>
-            </div>
-        </div>
-    
-        <div class="courses-container">
-            <div class="course">
-                <div class="course-preview">
-                    <h6>Name</h6>
-                    <h2>B. Sai Ram Charan</h2>
-                    <div class="btn1">
-                        <a href="#"><button>Delete</button></a>
-                    </div>
-                </div>
-                <div class="course-info">       
-                    <h6>Bank Name</h6>
-                    <h3>SBI</h3>
-                    <h6>Branch Name</h6>
-                    <h3>Badvel</h3>
-                    <h6>Account Number</h6>
-                    <h3>xxxxxxxxxxxxxxxx</h3>
-                    <h6>IFSC Code</h6>
-                    <h3>SBIN00000000</h3>
-                    <button class="btnt">Transfer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-container" style="padding-left: 25px;">
-        <div class="courses-container">
-            <div class="course">
-                <div class="course-preview" id="my_header">
-                    <h6>Name</h6>
-                    <h2>B. Krishna Lokesh</h2>
-                    <div class="btn1">
-                        <a href="#"><button>Delete</button></a>
-                    </div>
-                </div>
-                <div class="course-info">
-                    <h6>Bank Name</h6>
-                    <h3>SBI</h3>
-                    <h6>Branch Name</h6>
-                    <h3>Badvel</h3>
-                    <h6>Account Number</h6>
-                    <h3>xxxxxxxxxxxxxxxx</h3>
-                    <h6>IFSC Code</h6>
-                    <h3>SBIN00000000</h3>
-                    <button class="btnt">Transfer</button>
-                </div>
-            </div>
-        </div>
-    
-        <div class="courses-container">
-            <div class="course">
-                <div class="course-preview">
-                    <h6>Name</h6>
-                    <h2>G. Sai Venkatesh</h2>
-                    <div class="btn1">
-                        <a href="#"><button>Delete</button></a>
-                    </div>
-                </div>
-                <div class="course-info">
-                    <h6>Bank Name</h6>
-                    <h3>SBI</h3>
-                    <h6>Branch Name</h6>
-                    <h3>Badvel</h3>
-                    <h6>Account Number</h6>
-                    <h3>xxxxxxxxxxxxxxxx</h3>
-                    <h6>IFSC Code</h6>
-                    <h3>SBIN00000000</h3>
-                    <button class="btnt">Transfer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-container" style="padding-left: 25px;">
-        <div class="courses-container">
-            <div class="course">
-                <div class="course-preview" id="my_header">
-                    <h6>Name</h6>
-                    <h2>K. Venkat Ajay</h2>
-                    <div class="btn1">
-                        <a href="#"><button>Delete</button></a>
-                    </div>
-                </div>
-                <div class="course-info">
-                    <h6>Bank Name</h6>
-                    <h3>SBI</h3>
-                    <h6>Branch Name</h6>
-                    <h3>Badvel</h3>
-                    <h6>Account Number</h6>
-                    <h3>xxxxxxxxxxxxxxxx</h3>
-                    <h6>IFSC Code</h6>
-                    <h3>SBIN00000000</h3>
-                    <button class="btnt">Transfer</button>
-                </div>
-            </div>
-        </div>
-    
-        <div class="courses-container">
-            <div class="course">
-                <div class="course-preview">
-                    <h6>Name</h6>
-                    <h2>K. Venkata Vinay Babu</h2>
-                    <div class="btn1">
-                        <a href="#"><button>Delete</button></a>
-                    </div>
-                </div>
-                <div class="course-info">
-                    <h6>Bank Name</h6>
-                    <h3>SBI</h3>
-                    <h6>Branch Name</h6>
-                    <h3>Badvel</h3>
-                    <h6>Account Number</h6>
-                    <h3>xxxxxxxxxxxxxxxx</h3>
-                    <h6>IFSC Code</h6>
-                    <h3>SBIN00000000</h3>
-                    <button class="btnt">Transfer</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        <h1>No Payees</h1>
     </div>
     <input type="text" class="payee" value="{{data}}" style="display: none;">
     <!-- My payees -->
   </body>
   <script>
-    function toggleLogin() {
-      document.querySelector(".overlay").classList.toggle("open");
+    function toggleLogin(){
+        document.querySelector(".overlay").classList.toggle("open");
     }
+    function transferto(accountno){  
+        url=window.location
+        var pathname = new URL(url).pathname;
+        pathname = pathname.replace("/payee/", "");
+        var newurl = window.location.protocol + "//" + window.location.host + "/fundtransfer/" +  pathname +"to"+ accountno;
+        window.location.href = newurl
+     }
+     function deletePayee(accountno){
+       console.log(accountno)
+       $.ajax({
+                type: 'POST',
+                url: "/auth/deletePayee",
+                data: { accountno : accountno},
+                dataType: 'json',
+                success: function (result) {
+                    alert(result)
+                    location.reload()
+                },
+                error: function (request, status, error) {
+                    alert("Account Delete Failed")
+                }
+            });
+
+     }
+    
   </script>
 </html>
 <script>
@@ -223,12 +107,15 @@
 	}
     for(i=0; i+1<data.length;i+=2){
         
-        block+='<div class="grid-container" style="padding-left: 25px;"><div class="courses-container"><div class="course"><div class="course-preview"><h6>Name</h6><h2>'+data[i].name+'</h2><div class="btn1"><a href="#"><button>Delete</button></a></div></div><div class="course-info"><h6>Bank Name</h6><h3>'+data[i].bankname+'</h3><h6>Branch Name</h6><h3>'+data[i].branchname+'</h3><h6>Account Number</h6><h3>'+data[i].accountnumber+'</h3><h6>IFSC Code</h6><h3>'+data[i].ifsc_code+'</h3><button class="btnt">Transfer</button></div></div></div><div class="courses-container"><div class="course"><div class="course-preview" id="my_header"><h6>Name</h6><h2>'+data[i+1].name+'</h2><div class="btn1"><a href="#"><button>Delete</button></a></div></div><div class="course-info"><h6>Bank Name</h6><h3>'+data[i+1].bankname+'</h3><h6>Branch Name</h6><h3>'+data[i+1].branchname+'</h3><h6>Account Number</h6><h3>'+data[i+1].accountnumber+'</h3><h6>IFSC Code</h6><h3>'+data[i+1].ifsc_code+'</h3><button class="btnt">Transfer</button></div></div></div></div>'
+        block+='<div class="grid-container" style="padding-left: 25px;"><div class="courses-container"><div class="course"><div class="course-preview"><h6>Name</h6><h2>'+data[i].name+'</h2><div class="btn1"><a href="#"><button onclick=deletePayee('+data[i].accountnumber+')>Delete</button></a></div></div><div class="course-info"><h6>Bank Name</h6><h3>'+data[i].bankname+'</h3><h6>Branch Name</h6><h3>'+data[i].branchname+'</h3><h6>Account Number</h6><h3>'+data[i].accountnumber+'</h3><h6>IFSC Code</h6><h3>'+data[i].ifsc_code+'</h3><button onclick=transferto('+data[i].accountnumber+') class="btnt">Transfer</button></div></div></div><div class="courses-container"><div class="course"><div class="course-preview" id="my_header"><h6>Name</h6><h2>'+data[i+1].name+'</h2><div class="btn1"><a href="#"><button onclick=deletePayee('+data[i+1].accountnumber+')>Delete</button></a></div></div><div class="course-info"><h6>Bank Name</h6><h3>'+data[i+1].bankname+'</h3><h6>Branch Name</h6><h3>'+data[i+1].branchname+'</h3><h6>Account Number</h6><h3>'+data[i+1].accountnumber+'</h3><h6>IFSC Code</h6><h3>'+data[i+1].ifsc_code+'</h3><button onclick=transferto('+data[i+1].accountnumber+') class="btnt">Transfer</button></div></div></div></div>'
 	}
     if(data.length % 2 != 0){
         i=data.length-1
-        block+='<div class="grid-container" style="padding-left: 25px;"><div class="courses-container"><div class="course"><div class="course-preview"><h6>Name</h6><h2>'+data[i].name+'</h2><div class="btn1"><a href="#"><button>Delete</button></a></div></div><div class="course-info"><h6>Bank Name</h6><h3>'+data[i].bankname+'</h3><h6>Branch Name</h6><h3>'+data[i].branchname+'</h3><h6>Account Number</h6><h3>'+data[i].accountnumber+'</h3><h6>IFSC Code</h6><h3>'+data[i].ifsc_code+'</h3><button class="btnt">Transfer</button></div></div></div></div>'
+        block+='<div class="grid-container" style="padding-left: 25px;"><div class="courses-container"><div class="course"><div class="course-preview"><h6>Name</h6><h2>'+data[i].name+'</h2><div class="btn1"><a href="#"><button onclick=deletePayee('+data[i].accountnumber+') >Delete</button></a></div></div><div class="course-info"><h6>Bank Name</h6><h3>'+data[i].bankname+'</h3><h6>Branch Name</h6><h3>'+data[i].branchname+'</h3><h6>Account Number</h6><h3>'+data[i].accountnumber+'</h3><h6>IFSC Code</h6><h3>'+data[i].ifsc_code+'</h3><button onclick=transferto('+data[i].accountnumber+') class="btnt">Transfer</button></div></div></div></div>'
     }
     document.getElementById("My_payees").innerHTML=block;
+    
+    
+    
 
 </script>

@@ -135,6 +135,19 @@ router.get('/transaction',(req,res) => {
 
 })
 
+router.get('/fundtransfer/:accountno',(req,res) => {
+    if(req.session.loggedinUser){
+        db.query('SELECT * FROM accounts WHERE userid=?',[req.session.userid], function (err, data) {
+            if (err) throw err;
+            res.render('fundtransfer',{data:JSON.stringify(data)})  
+        
+        });
+        
+    }
+    
+
+})
+
 router.get('/fundtransfer',(req,res)=>{
     if(req.session.loggedinUser){
         db.query('SELECT * FROM accounts WHERE userid=?',[req.session.userid], function (err, data) {
@@ -145,6 +158,17 @@ router.get('/fundtransfer',(req,res)=>{
         
     }
 
+})
+
+router.get('/payee/:accountno',(req,res) => {
+    if(req.session.loggedinUser){
+        db.query('SELECT * FROM payees WHERE userid=?',[req.session.userid], function (err, data) {
+            if (err) throw err;
+            res.render('payee',{data:JSON.stringify(data)})  
+        
+        });
+        
+    }
 })
 
 router.get('/payee',(req,res)=>{
