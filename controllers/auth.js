@@ -332,16 +332,18 @@ exports.fundtransfer = (req,res) =>{
                     });
 
                     db.query('SELECT max(transid) max FROM transactions where accountno = ?',[accno], function (err, d) {
-                        db.query('UPDATE accounts SET ? where accountno = ?',[{balance:+bal1[0].balance + +amount},[toaccno]], function (err, data) {
-                            if (err) throw err;
-                        });
-                        db.query('INSERT INTO transactions SET ?',[{transtype:"fundtransfer",amount:amount,description:description,payment_type:"credit",accountno:toaccno}], function (err, data) {
-                            if (err) throw err;
-                        });
-                        db.query('UPDATE transactions SET ? where transid in (SELECT max(transid) FROM transactions) ',[{transid : d[0].max}], function (err, data) {
-                            if (err) throw err;
-                        });
+                        if(bal1.length>0){
+                            db.query('UPDATE accounts SET ? where accountno = ?',[{balance:+bal1[0].balance + +amount},[toaccno]], function (err, data) {
+                                if (err) throw err;
+                            });
+                            db.query('INSERT INTO transactions SET ?',[{transtype:"fundtransfer",amount:amount,description:description,payment_type:"credit",accountno:toaccno}], function (err, data) {
+                                if (err) throw err;
+                            });
+                            db.query('UPDATE transactions SET ? where transid in (SELECT max(transid) FROM transactions) ',[{transid : d[0].max}], function (err, data) {
+                                if (err) throw err;
+                            });
 
+                        }
                         res.send(JSON.stringify("Fund transaction Successful , transaction id is "+d[0].max))
 
                     });
