@@ -323,6 +323,7 @@ exports.fundtransfer = (req,res) =>{
     const description = req.body.description
     const amount =req.body.amount
     const toaccno = req.body.to_acc
+     
 
     if(transfer_type == "Transfer_Now"){
         db.query('SELECT balance FROM accounts WHERE accountno = ?',[accno], function (err, bal) {
@@ -359,7 +360,14 @@ exports.fundtransfer = (req,res) =>{
         }); 
     }
     else{
-
+        const start_date = req.body.start_date
+        const freq = req.body['frequency[]']
+        const number_of_times = req.body['number_of_times[]']
+        db.query('INSERT INTO standing_instruction SET ?',[{userid:req.session.userid,accountnumber:accno,accountno:toaccno,startdate:start_date,periodicity:freq,no_of_instances:number_of_times,amount:amount}], function (err, data) {
+            if (err) throw err;
+            res.send(JSON.stringify("standing instruction added successfully"))
+        });
+        
     }
 }
 

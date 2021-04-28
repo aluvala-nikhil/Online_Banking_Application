@@ -51,45 +51,38 @@
                     <label for="" style="width:80%; float: left;">Start Date:</label>
                 </div>
                 <div style="width: 84%; float:left;">
-                    <input type="date" id="" name="">
+                    <input name="start_date" type="date" id="" >
                 </div>
             </div>
             <div id="Frequency" style="margin-top: 9%; display: none">
                 <div style="width: 14%; float:left ; padding-left: 20px;">
                     <label for="" style="width:80%; float: left;">Frequency:</label>
                 </div>
-                <select name="" id="" style="width: 13%;">
-                    <option value="">Select SI Frequency</option>
-                    <option value="">Monthly</option>
-                    <option value="">Every alternative Monthly</option>
-                    <option value="">Quarterly</option>
-                    <option value="">Half Yearly</option>
-                    <option value="">Yearly</option>
+                <select name="frequency[]" id="" style="width: 13%;">
+                    <option value="Monthly">Monthly</option>
+                    <option value="Quarterly">Quarterly</option>
+                    <option value="Half Yearly">Half Yearly</option>
+                    <option value="Yearly">Yearly</option>
                 </select>
             </div>
             <div id="Number_of_Times" style="margin-top: 2%; display: none">
                 <div style="width: 14%; float:left ; padding-left: 20px;">
                     <label for="" style="width:80%; float: left;">Number of Times:</label>
                 </div>
-                <select name="" id="" style="width: 13%;">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                    <option value="">4</option>
-                    <option value="">5</option>
-                    <option value="">6</option>
-                    <option value="">7</option>
-                    <option value="">8</option>
-                    <option value="">9</option>
-                    <option value="">10</option>
+                <select name="number_of_times[]" id="" style="width: 13%;">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
                 </select>
             </div>
-            <div id="End_Date" style="margin-top: 2%; display: none">
-                <div style="width: 14%; float:left ; padding-left: 20px;">
-                    <label for="" style="width:80%; float: left;">End Date:</label>
-                </div>
-                <input type="date" id="" name="">
-            </div>
+            
     </div>
 
 
@@ -147,13 +140,13 @@
             document.getElementById("Start_Date").style.display = "block"
             document.getElementById("Frequency").style.display = "block"
             document.getElementById("Number_of_Times").style.display = "block"
-            document.getElementById("End_Date").style.display = "block"
+            
         }
         else{
             document.getElementById("Start_Date").style.display = "none"
             document.getElementById("Frequency").style.display = "none"
             document.getElementById("Number_of_Times").style.display = "none"
-            document.getElementById("End_Date").style.display = "none"
+           
         }
     }
     
