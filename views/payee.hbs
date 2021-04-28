@@ -51,6 +51,7 @@
             <input type="text" name="ifsc_code" placeholder="IFSC Code"/>
             <div class="footer">
             <button type="submit">Add Now</button>
+            <input type="text" class="hidden" name="fromacc" value="" style="display: none;">
             </div>
           </form>
         </div>
@@ -100,6 +101,10 @@
   </script>
 </html>
 <script>
+  url=window.location
+  var pathname = new URL(url).pathname;
+  pathname = pathname.replace("/payee/", "");
+  document.querySelector(".hidden").value = pathname
 	var data= JSON.parse(document.querySelector(".payee").value);
     var block="";
     if(data.length == 0){

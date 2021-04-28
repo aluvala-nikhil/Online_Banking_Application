@@ -305,7 +305,7 @@ exports.payee  = (req,res) =>{
         const ifsc_code = req.body.ifsc_code;
         db.query('INSERT INTO payees SET ?',[{userid:req.session.userid,accountnumber:account_number,name:name,bankname:bank_name,branchname:branch_name,ifsc_code:ifsc_code}], function (err, data) {
             if (err) throw err;
-            res.status(200).redirect("/payee")
+            res.status(200).redirect("/payee/"+req.body.fromacc)
         });
 
 
