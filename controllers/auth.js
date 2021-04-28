@@ -23,7 +23,6 @@ exports.login = async(req,res) => {
 
         db.query('SELECT * FROM customer WHERE emailid=?',[email], async(error, results) =>{
             if(results.length != 0){
-                console.log(results)
                 if( !results || !(await bcrypt.compare(password,results[0].password))) {
                     res.status(401).render('login',{
                         message:'Email or Password is incorrect'
@@ -54,7 +53,6 @@ exports.login = async(req,res) => {
             
             else{
                 db.query('SELECT * FROM customer WHERE username=?',[email], async(error, results) =>{
-                    console.log(results)
                     if( results.length ==0 || !(await bcrypt.compare(password,results[0].password))) {
                         res.status(401).render('login',{
                             message:'Email or Username or Password is incorrect'
@@ -257,7 +255,6 @@ exports.inbox = (req,res) =>{
     else{
         
         for(i=0;i<req.body['array[]'].length;i++){
-            console.log(req.body['array[]'][i]);
             db.query("DELETE from messages where message_id=?",[req.body['array[]'][i]], function(err,data){
                 if (err) throw err;
             })
@@ -286,11 +283,9 @@ exports.transaction = (req,res) =>{
                 data=data.reverse();
                 if(data.length<req.body.trans_count_value){
                     req.body.trans_count_value=data.length
-                    console.log(req.body.trans_count_value)
                 }
 
                 data.splice(req.body.trans_count_value, data.length-req.body.trans_count_value);
-                console.log(data)
                 res.send(JSON.stringify(data))
             });
         }
@@ -477,7 +472,6 @@ exports.creditCardPayment = (req,res) =>{
 
 exports.deleteAccount = (req,res) =>{
     if(req.session.loggedinUser){
-        console.log(req.body.accountno)
         db.query("SELECT * from accounts where accountno= ?",[req.body.accountno], function(err,data){
             if(data[0].balance==0){
                 db.query("DELETE from accounts where accountno=?",[req.body.accountno], function(err1,data1){
