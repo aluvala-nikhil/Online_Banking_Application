@@ -415,11 +415,18 @@ exports.homeLoanPayment = (req,res) =>{
                         if (err2) throw err2;
                         db.query("UPDATE accounts SET balance= balance-? where accountno=?",[[data1[0].amount],[req.body.loan_accountno]], function(err5,data5){
                             if (err5) throw err5;
-                            db.query("INSERT INTO transactions(transtype, amount, description, payment_type, accountno) VALUES (?,?,?,?,?) ",[["payment"],[20000],["Home Loan Amount"],["debit"],[req.body.loan_accountno]], function(err3,data3){
+                            db.query("INSERT INTO transactions(transtype, amount, description, payment_type, accountno) VALUES (?,?,?,?,?) ",[["payment"],[data1[0].amount],["Home Loan Amount"],["credit"],[req.body.loan_accountno]], function(err3,data3){
                                 if (err3) throw err3;
-                                db.query("INSERT INTO transactions(transtype, amount, description, payment_type, accountno) VALUES (?,?,?,?,?) ",[["payment"],[20000],["For Home Loan"],["debit"],[req.body.accountno]], function(err4,data4){
-                                    if (err4) throw err4;
-                                    res.send(JSON.stringify("Loan Payment Succeeded"))
+                                db.query('SELECT max(transid) max FROM transactions where accountno = ?',[req.body.loan_accountno], function (err, d) {
+                                    db.query("INSERT INTO transactions(transtype, amount, description, payment_type, accountno) VALUES (?,?,?,?,?) ",[["payment"],[data1[0].amount],["For Home Loan"],["debit"],[req.body.accountno]], function(err4,data4){
+                                        if (err4) throw err4;
+                                        
+                                    });
+                                    db.query('UPDATE transactions SET ? where transid in (SELECT max(transid) FROM transactions) ',[{transid : d[0].max}], function (err, data) {
+                                        if (err) throw err;
+                                        res.send(JSON.stringify("Loan Payment Succeeded"))
+                                    });
+
                                 });
                             });
                         });
@@ -449,18 +456,25 @@ exports.creditCardPayment = (req,res) =>{
                         if (err2) throw err2;
                         db.query("UPDATE accounts SET balance=balance-? where accountno=?",[[data1[0].amount],[req.body.credit_accountno]], function(err5,data5){
                             if (err5) throw err5;
-                            db.query("INSERT INTO transactions(transtype, amount, description, payment_type, accountno) VALUES (?,?,?,?,?) ",[["payment"],[20000],["Credit Card Payment"],["debit"],[req.body.credit_accountno]], function(err3,data3){
+                            db.query("INSERT INTO transactions(transtype, amount, description, payment_type, accountno) VALUES (?,?,?,?,?) ",[["payment"],[data1[0].amount],["Credit Card Payment"],["credit"],[req.body.credit_accountno]], function(err3,data3){
                                 if (err3) throw err3;
-                                db.query("INSERT INTO transactions(transtype, amount, description, payment_type, accountno) VALUES (?,?,?,?,?) ",[["payment"],[20000],["For Credit Crad"],["debit"],[req.body.accountno]], function(err4,data4){
-                                    if (err4) throw err4;
-                                    res.send(JSON.stringify("Credit Card Payment Succeeded"))
+                                db.query('SELECT max(transid) max FROM transactions where accountno = ?',[req.body.credit_accountno], function (err, d) {
+                                    db.query("INSERT INTO transactions(transtype, amount, description, payment_type, accountno) VALUES (?,?,?,?,?) ",[["payment"],[data1[0].amount],["For Home Loan"],["debit"],[req.body.accountno]], function(err4,data4){
+                                        if (err4) throw err4;
+                                        
+                                    });
+                                    db.query('UPDATE transactions SET ? where transid in (SELECT max(transid) FROM transactions) ',[{transid : d[0].max}], function (err, data) {
+                                        if (err) throw err;
+                                        res.send(JSON.stringify("Credit card Payment Succeeded"))
+                                    });
+
                                 });
                             });
                         });
                     });
                 }
                 else{
-                    res.send(JSON.stringify("Credit Crad Payment Failed  due to Insufficient Balance"))
+                    res.send(JSON.stringify("Credit Card Payment Failed  due to Insufficient Balance"))
                 }
             });
         });
